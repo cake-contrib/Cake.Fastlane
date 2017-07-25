@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <id>Cake.Http</id>
+    <version>0.0.0</version>
+    <authors>RLittlesII</authors>
+    <owners>RLittlesII</owners>
+    <title>Cake.Fastlane</title>
+    <description>Cake AddIn that extends Cake with support for fastlane tools.</description>
+    <summary>Cake AddIn that extends Cake with support for fastlane tools.</summary>
+    <licenseUrl>https://github.com/RLittlesII/Cake.Fastlane/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/RLittlesII/Cake.Fastlane</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <copyright>Copyright (c) Rodney Littles II 2017</copyright>
+    <releaseNotes></releaseNotes>
+    <tags>cake script build httpclient web</tags>
+  </metadata>
+  <files>
+    <file src="Cake.Fastlane.dll" target="lib/netstandard1.6" />
+    <file src="Cake.Fastlane.pdb" target="lib/netstandard1.6" />
+  </files>
+</package>

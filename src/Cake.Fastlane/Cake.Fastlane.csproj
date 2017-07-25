@@ -2,6 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.6</TargetFramework>
+    <Version>0.1.0</Version>
+    <Description>Cake AddIn that extends Cake with support for fastlane tools.</Description>
+    <RepositoryUrl>https://github.com/RLittlesII/Cake.Fastlane</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/RLittlesII/Cake.Fastlane/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl />
+    <Authors>RLittlesII</Authors>
+    <Copyright>Copyright (c) 2017 Rodney Littles II</Copyright>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netstandard1.6\Cake.Fastlane.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
