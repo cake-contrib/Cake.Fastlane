@@ -3,6 +3,7 @@ using Cake.Core.Diagnostics;
 using Cake.Core.IO;
 using Cake.Core.Tooling;
 using NSubstitute;
+using Xunit;
 
 namespace Cake.Fastlane.Tests
 {

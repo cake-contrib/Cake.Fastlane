@@ -1,11 +1,21 @@
 language: csharp
+
 script:
   - ./build.sh --settings_skipverification=true -v diagnostic
 os:
   - linux
   - osx
 
+# .NET CLI require OSX 10.10
+osx_image: xcode8.3
+
+mono:
+  - 4.4.2
+
+dotnet: 1.0.4
+
 cache:
   directories:
     - src/packages
     - tools
+    

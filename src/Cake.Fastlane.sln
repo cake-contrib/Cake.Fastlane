@@ -20,6 +20,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cake.Fastlane", "Cake.Fastl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cake.Fastlane.Tests", "Cake.Fastlane.Tests\Cake.Fastlane.Tests.csproj", "{68AF191E-8CD7-475A-BC80-F8B73CB4B377}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuspec", "nuspec", "{187A569C-7C1F-4699-8E7C-178B97F17389}"
+	ProjectSection(SolutionItems) = preProject
+		..\nuspec\nuget\Cake.Fastlane.nuspec = ..\nuspec\nuget\Cake.Fastlane.nuspec
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

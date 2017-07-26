@@ -1,12 +1,12 @@
-﻿using Cake.Core;
-using System;
+﻿using System;
+using Cake.Core;
 
 namespace Cake.Fastlane
 {
     /// <summary>
     /// Provides functionality for fastlane tools.
     /// </summary>
-    public sealed class FastlaneProvider
+    public sealed class FastlaneProvider : IFastlaneProvider
     {
         private readonly IFastlaneMatchProvider _fastlaneMatchProvider;
 
@@ -34,9 +34,13 @@ namespace Cake.Fastlane
                 context.Tools);
         }
 
-        public void Match(MatchConfiguration match = null)
+        /// <summary>
+        /// Executes fastlane match with the specified configuration.
+        /// </summary>
+        /// <param name="matchConfiguration">The fastlane match configuration.</param>
+        public void Match(MatchConfiguration matchConfiguration = null)
         {
-            _fastlaneMatchProvider.Match(match ?? new MatchConfiguration());
+            _fastlaneMatchProvider.Match(matchConfiguration ?? new MatchConfiguration());
         }
     }
 }
