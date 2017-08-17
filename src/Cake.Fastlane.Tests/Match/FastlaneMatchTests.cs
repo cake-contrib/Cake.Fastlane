@@ -123,7 +123,7 @@ namespace Cake.Fastlane.Tests.Match
 
                 // Then
                 Assert.IsType<ArgumentNullException>(result);
-                Assert.Equal("Value cannot be null.\r\nParameter name: configuration", result?.Message);
+                Assert.Equal("Value cannot be null.\nParameter name: configuration", result?.Message);
             }
 
             [Fact]

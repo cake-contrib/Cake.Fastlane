@@ -1,0 +1,11 @@
+language: csharp
+script:
+  - ./build.sh --settings_skipverification=true -v diagnostic
+os:
+  - linux
+  - osx
+
+cache:
+  directories:
+    - src/packages
+    - tools

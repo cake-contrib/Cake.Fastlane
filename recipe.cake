@@ -1,21 +1,23 @@
-// #load nuget:https://www.myget.org/F/cake-contrib/api/v2?package=Cake.Recipe&prerelease
-#load nuget:https://www.myget.org/F/rlittlesii-cake-recipe/api/v2?package=Cake.Recipe&prerelease
+#load nuget:https://www.myget.org/F/cake-contrib/api/v2?package=Cake.Recipe&prerelease
 
 Environment.SetVariableNames();
 
 BuildParameters.SetParameters(context: Context, 
-                            buildSystem: BuildSystem,
-                            sourceDirectoryPath: "./src",
-                            title: "Cake.Fastlane",
-                            repositoryOwner: "RLittlesII", 
-                            repositoryName: "Cake.Fastlane", 
-                            appVeyorAccountName: "RLittlesII",
-                            shouldPostToGitter: false,
-                            shouldPostToSlack: false,
-							shouldPostToTwitter: false);
+							title: "Cake.Fastlane",
+							buildSystem: BuildSystem,
+							sourceDirectoryPath: "./src",
+							repositoryOwner: "RLittlesII",  
+							repositoryName: "Cake.Fastlane",  
+							appVeyorAccountName: "RLittlesII",
+							shouldRunDupFinder: false,
+							shouldRunInspectCode: false);
 
 BuildParameters.PrintParameters(Context);
 
-ToolSettings.SetToolSettings(context: Context);
+ToolSettings.SetToolSettings(context: Context,
+                            dupFinderExcludePattern: new string[] { BuildParameters.RootDirectoryPath + "/src/Cake.Fastlane.Tests/*.cs" }, 
+                            testCoverageFilter: "+[*]* -[xunit.*]* -[Cake.Core]* -[Cake.Testing]* -[*.Tests]* ", 
+                            testCoverageExcludeByAttribute: "*.ExcludeFromCodeCoverage*", 
+                            testCoverageExcludeByFile: "*/*Designer.cs;*/*.g.cs;*/*.g.i.cs");
 
 Build.RunDotNetCore();

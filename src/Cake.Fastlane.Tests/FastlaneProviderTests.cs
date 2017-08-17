@@ -17,7 +17,7 @@ namespace Cake.Fastlane.Tests
                 // Then
                 Assert.NotNull(result);
                 Assert.IsType<ArgumentNullException>(result);
-                Assert.Equal("Value cannot be null.\r\nParameter name: context", result.Message);
+                Assert.Equal("Value cannot be null.\nParameter name: context", result.Message);
             }
 
             [Theory]

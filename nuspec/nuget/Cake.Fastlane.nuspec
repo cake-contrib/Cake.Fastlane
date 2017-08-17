@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
-    <id>Cake.Http</id>
+    <id>Cake.Fastlane</id>
     <version>0.0.0</version>
     <authors>RLittlesII</authors>
     <owners>RLittlesII</owners>
     <title>Cake.Fastlane</title>
-    <description>Cake AddIn that extends Cake with support for fastlane tools.</description>
+    <description>Cake addin that extends Cake with support for fastlane tools.</description>
     <summary>Cake AddIn that extends Cake with support for fastlane tools.</summary>
     <licenseUrl>https://github.com/RLittlesII/Cake.Fastlane/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/RLittlesII/Cake.Fastlane</projectUrl>

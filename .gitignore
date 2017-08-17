@@ -279,6 +279,9 @@ tools/**
 !tools/packages.config
 BuildArtifacts/**
 
+# dotnet Core
+.dotnet/**
+
 # Telerik's JustMock configuration file
 *.jmconfig
 
