@@ -16,7 +16,7 @@ namespace Cake.Fastlane
         /// <value>
         /// The fastlane provider.
         /// </value>
-        private static IFastlaneProvider FastlaneProvider { get; set; }
+        private static FastlaneProvider FastlaneProvider { get; set; }
 
         /// <summary>
         /// Gets an instance of <see cref="FastlaneProvider"/> that can be used to interact with fast lane tools.
@@ -25,7 +25,8 @@ namespace Cake.Fastlane
         /// <returns></returns>
         /// <exception cref="System.ArgumentNullException">context</exception>
         [CakePropertyAlias(Cache = true)]
-        public static IFastlaneProvider Fastlane(this ICakeContext context)
+        [CakeAliasCategory("Fastlane")]
+        public static FastlaneProvider Fastlane(this ICakeContext context)
         {
             if (context == null)
             {

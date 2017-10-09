@@ -26,8 +26,6 @@ namespace Cake.Fastlane
                 throw new CakeException("Use of fastlane tools requires Mac OSX");
             }
 
-            context.Tools.RegisterFile("fastlane");
-
             _fastlaneMatchProvider = new FastlaneMatchProvider(context.FileSystem,
                 context.Environment,
                 context.ProcessRunner,

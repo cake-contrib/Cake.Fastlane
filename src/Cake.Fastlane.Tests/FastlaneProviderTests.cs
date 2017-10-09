@@ -19,7 +19,7 @@ namespace Cake.Fastlane.Tests
                 Assert.IsType<ArgumentNullException>(result);
                 Assert.Equal("Value cannot be null.\r\nParameter name: context", result.Message);
             }
-            
+
             [OSXFact]
             public void Should_Throw_If_Context_Null_OSX()
             {

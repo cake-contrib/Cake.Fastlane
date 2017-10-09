@@ -125,7 +125,7 @@ namespace Cake.Fastlane.Tests.Match
                 Assert.IsType<ArgumentNullException>(result);
                 Assert.Equal("Value cannot be null.\r\nParameter name: configuration", result?.Message);
             }
-            
+
             [OSXFact]
             public void Should_Throw_If_Settings_Null_OSX()
             {

@@ -1,12 +1,13 @@
 ﻿using System;
 using Cake.Core;
+using Cake.Core.Annotations;
 using Cake.Core.IO;
 using Cake.Core.Tooling;
 
 namespace Cake.Fastlane
 {
     /// <summary>
-    ///
+    /// Provides functionality for fastlane match tool.
     /// </summary>
     /// <seealso cref="IFastlaneMatchProvider" />
     public class FastlaneMatchProvider : FastlaneTool<MatchConfiguration>, IFastlaneMatchProvider
@@ -19,7 +20,6 @@ namespace Cake.Fastlane
         private readonly IToolLocator _tools;
         private IFileSystem _fileSystem;
         private IProcessRunner _processRunner;
-
 
         /// <summary>
         /// Initializes an instance of <see cref="FastlaneMatchProvider"/>.
@@ -45,6 +45,7 @@ namespace Cake.Fastlane
         /// </summary>
         /// <param name="configuration"></param>
         /// <exception cref="ArgumentNullException"></exception>
+        [CakeAliasCategory("Match")]
         public void Match(MatchConfiguration configuration)
         {
             if (configuration == null)
@@ -99,12 +100,12 @@ namespace Cake.Fastlane
 
             if (!string.IsNullOrEmpty(match.GitFullName))
             {
-                // builder.AppendSwitch("-a", match.GitFullName);
+                builder.AppendSwitch("--git_full_name", match.GitFullName);
             }
 
             if (!string.IsNullOrEmpty(match.GitUserEmail))
             {
-                // builder.AppendSwitch("-a", match.GitUserEmail);
+                builder.AppendSwitch("--git_user_email", match.GitUserEmail);
             }
 
             if (!string.IsNullOrEmpty(match.GitUrl))

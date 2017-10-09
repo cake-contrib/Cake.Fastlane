@@ -11,7 +11,7 @@ namespace Cake.Fastlane.Tests
         {
             Family = EnvironmentHelper.GetPlatformFamily();
         }
-        
+
         public WindowsFact(string reason = null)
         {
             if (Family != PlatformFamily.Windows)
@@ -20,7 +20,7 @@ namespace Cake.Fastlane.Tests
             }
         }
     }
-    
+
     public sealed class OSXFact : FactAttribute
     {
         private static readonly PlatformFamily Family;
@@ -29,7 +29,7 @@ namespace Cake.Fastlane.Tests
         {
             Family = EnvironmentHelper.GetPlatformFamily();
         }
-        
+
         public OSXFact(string reason = null)
         {
             if (Family != PlatformFamily.OSX)
