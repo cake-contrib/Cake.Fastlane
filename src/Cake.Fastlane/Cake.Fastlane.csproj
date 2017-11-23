@@ -3,12 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.6</TargetFramework>
     <Version>0.1.0</Version>
-    <Description>Cake AddIn that extends Cake with support for fastlane tools.</Description>
+    <Description>Cake addIn that extends Cake with support for fastlane tools.</Description>
     <RepositoryUrl>https://github.com/RLittlesII/Cake.Fastlane</RepositoryUrl>
     <PackageLicenseUrl>https://github.com/RLittlesII/Cake.Fastlane/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl />
+    <PackageProjectUrl>https://github.com/RLittlesII/Cake.Fastlane/</PackageProjectUrl>
     <Authors>RLittlesII</Authors>
     <Copyright>Copyright (c) 2017 Rodney Littles II</Copyright>
+    <PackageTags>cake script build fastlane ios mobile</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

@@ -1,9 +1,9 @@
 ﻿namespace Cake.Fastlane
 {
     /// <summary>
-    /// Interface that represents fastlane match.
+    /// Interface that defines functionality for fastlane tools.
     /// </summary>
-    internal interface IFastlaneMatchProvider
+    public interface IFastlaneProvider
     {
         /// <summary>
         /// Executes fastlane match with the specified configuration.

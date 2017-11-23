@@ -24,7 +24,7 @@ namespace Cake.Fastlane.Tests.Match
             }
 
             [Fact]
-            public void Should_Throw_If_CSharp_Compiler_Runner_Was_Not_Found()
+            public void Should_Throw_If_Fastlane_Match_Runner_Was_Not_Found()
             {
                 // Given
                 var fixture = new FastlaneMatchFixture();
@@ -41,7 +41,7 @@ namespace Cake.Fastlane.Tests.Match
             [Theory]
             [InlineData("/bin/tools/fastlane", "/bin/tools/fastlane")]
             [InlineData("./tools/fastlane", "/Working/tools/fastlane")]
-            public void Should_Use_CSharp_Compiler_Runner_From_Tool_Path_If_Provided(string toolPath, string expected)
+            public void Should_Use_Fastlane_Match_Runner_From_Tool_Path_If_Provided(string toolPath, string expected)
             {
                 // Given
                 var fixture = new FastlaneMatchFixture();
@@ -56,7 +56,7 @@ namespace Cake.Fastlane.Tests.Match
             }
 
             [Fact]
-            public void Should_Find_CSharp_Compiler_Runner_If_Tool_Path_Not_Provided()
+            public void Should_Find_Fastlane_Match_Runner_If_Tool_Path_Not_Provided()
             {
                 // Given
                 var fixture = new FastlaneMatchFixture();
@@ -65,7 +65,7 @@ namespace Cake.Fastlane.Tests.Match
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal("/Working/tools/fastlane", result.Path.FullPath);
+                Assert.Equal("/Working/tools/fastlane.exe", result.Path.FullPath);
             }
 
             [Fact]
@@ -111,8 +111,23 @@ namespace Cake.Fastlane.Tests.Match
                 Assert.Equal("fastlane: Process returned an error (exit code 1).", result?.Message);
             }
 
-            [Fact]
+            [WindowsFact]
             public void Should_Throw_If_Settings_Null()
+            {
+                // Given
+                var fixture = new FastlaneMatchFixture();
+                fixture.Settings = null;
+
+                // When
+                var result = Record.Exception(() => fixture.Run());
+
+                // Then
+                Assert.IsType<ArgumentNullException>(result);
+                Assert.Equal("Value cannot be null.\r\nParameter name: configuration", result?.Message);
+            }
+            
+            [OSXFact]
+            public void Should_Throw_If_Settings_Null_OSX()
             {
                 // Given
                 var fixture = new FastlaneMatchFixture();
@@ -127,7 +142,7 @@ namespace Cake.Fastlane.Tests.Match
             }
 
             [Fact]
-            public void Should_Add_Match_If_No_Match_Provided()
+            public void Should_Add_Match_If_No_Configuration_Provided()
             {
                 // Given
                 var fixture = new FastlaneMatchFixture();
@@ -139,11 +154,39 @@ namespace Cake.Fastlane.Tests.Match
                 Assert.Equal("match", result.Args);
             }
 
+            [Fact]
+            public void Should_Add_Git_URL_If_Provided()
+            {
+                // Given
+                var fixture = new FastlaneMatchFixture();
+                fixture.Settings.GitUrl = "https://cake.fastlane.org";
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.Equal("match -r https://cake.fastlane.org", result.Args);
+            }
+
+            [Fact]
+            public void Should_Add_Git_Branch_If_Provided()
+            {
+                // Given
+                var fixture = new FastlaneMatchFixture();
+                fixture.Settings.GitBranch = "develop";
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.Equal("match --git_branch develop", result.Args);
+            }
+
             [Theory]
             [InlineData(CertificateType.Development)]
-            [InlineData(CertificateType.Development)]
-            [InlineData(CertificateType.Development)]
-            [InlineData(CertificateType.Development)]
+            [InlineData(CertificateType.AdHoc)]
+            [InlineData(CertificateType.Enterprise)]
+            [InlineData(CertificateType.AppStore)]
             public void Should_Add_Certificate_Type_If_Provided(CertificateType certificateType)
             {
                 // Given
@@ -200,6 +243,118 @@ namespace Cake.Fastlane.Tests.Match
             }
 
             [Fact]
+            public void Should_Add_Key_Chain_Password_If_Provided()
+            {
+                // Given
+                var fixture = new FastlaneMatchFixture();
+                fixture.Settings.KeyChainPassword = "password";
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.Equal($"match -p {fixture.Settings.KeyChainPassword}", result.Args);
+            }
+
+            [Fact]
+            public void Should_Add_Team_Id_If_Provided()
+            {
+                // Given
+                var fixture = new FastlaneMatchFixture();
+                fixture.Settings.TeamId = "456";
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.Equal($"match -b {fixture.Settings.TeamId}", result.Args);
+            }
+
+            [Fact]
+            public void Should_Add_Team_Name_If_Provided()
+            {
+                // Given
+                var fixture = new FastlaneMatchFixture();
+                fixture.Settings.TeamName = "NY Mets";
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.Equal($"match -l {fixture.Settings.TeamName}", result.Args);
+            }
+
+            [Fact]
+            public void Should_Add_Force_If_Provided()
+            {
+                // Given
+                var fixture = new FastlaneMatchFixture();
+                fixture.Settings.Force = true;
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.Equal("match --force", result.Args);
+            }
+
+            [Fact]
+            public void Should_Add_Skip_Confirmation_If_Provided()
+            {
+                // Given
+                var fixture = new FastlaneMatchFixture();
+                fixture.Settings.SkipConfirmation = true;
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.Equal("match --skip_confirmation", result.Args);
+            }
+
+            [Fact]
+            public void Should_Add_Shallow_Clone_If_Provided()
+            {
+                // Given
+                var fixture = new FastlaneMatchFixture();
+                fixture.Settings.ShallowClone = true;
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.Equal("match --shallow_clone", result.Args);
+            }
+
+            [Fact]
+            public void Should_Add_Clone_Branch_Directly_If_Provided()
+            {
+                // Given
+                var fixture = new FastlaneMatchFixture();
+                fixture.Settings.CloneBranchDirectly = true;
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.Equal("match --clone_branch_directly", result.Args);
+            }
+
+            [Fact]
+            public void Should_Add_Workspace_If_Provided()
+            {
+                // Given
+                var fixture = new FastlaneMatchFixture();
+                fixture.Settings.Workspace = "./usr/";
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.Equal("match --workspace \"/Working/usr\"", result.Args);
+            }
+
+            [Fact]
             public void Should_Add_Force_For_New_Devices_If_Provided()
             {
                 // Given
@@ -211,6 +366,20 @@ namespace Cake.Fastlane.Tests.Match
 
                 // Then
                 Assert.Equal("match --force_for_new_devices", result.Args);
+            }
+
+            [Fact]
+            public void Should_Add_Skip_Docs_Provided()
+            {
+                // Given
+                var fixture = new FastlaneMatchFixture();
+                fixture.Settings.SkipDocs = true;
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.Equal("match --skip_docs", result.Args);
             }
 
             [Fact]

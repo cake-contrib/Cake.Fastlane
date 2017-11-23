@@ -1,4 +1,5 @@
-﻿using Cake.Core;
+﻿using System;
+using Cake.Core;
 using Cake.Core.Annotations;
 
 namespace Cake.Fastlane
@@ -10,15 +11,28 @@ namespace Cake.Fastlane
     public static class FastlaneAliases
     {
         /// <summary>
+        /// Gets the fastlane provider.
+        /// </summary>
+        /// <value>
+        /// The fastlane provider.
+        /// </value>
+        private static IFastlaneProvider FastlaneProvider { get; set; }
+
+        /// <summary>
         /// Gets an instance of <see cref="FastlaneProvider"/> that can be used to interact with fast lane tools.
         /// </summary>
         /// <param name="context">The context.</param>
         /// <returns></returns>
         /// <exception cref="System.ArgumentNullException">context</exception>
         [CakePropertyAlias(Cache = true)]
-        public static FastlaneProvider Fastlane(this ICakeContext context)
+        public static IFastlaneProvider Fastlane(this ICakeContext context)
         {
-            return new FastlaneProvider(context);
+            if (context == null)
+            {
+                throw new ArgumentNullException(nameof(context));
+            }
+
+            return FastlaneProvider ?? (FastlaneProvider = new FastlaneProvider(context));
         }
     }
 }

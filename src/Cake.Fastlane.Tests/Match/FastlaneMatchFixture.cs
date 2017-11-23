@@ -5,16 +5,11 @@ namespace Cake.Fastlane.Tests.Match
     internal class FastlaneMatchFixture : ToolFixture<MatchConfiguration>
     {
         public FastlaneMatchFixture()
-            : base("fastlane")
+            : base("fastlane.exe")
         {
         }
 
         protected override void RunTool()
-        {
-            Match();
-        }
-
-        private void Match()
         {
             var match = new FastlaneMatchProvider(FileSystem, Environment, ProcessRunner, Tools);
 
