@@ -16,7 +16,9 @@
     <tags>cake script build fastlane ios mobile</tags>
   </metadata>
   <files>
-    <file src="Cake.Fastlane.dll" target="lib/netstandard1.6" />
-    <file src="Cake.Fastlane.pdb" target="lib/netstandard1.6" />
+    <file src="net46\Cake.Fastlane.dll" target="lib/net46" /> 
+    <file src="net46\Cake.Fastlane.pdb" target="lib/net46" />
+    <file src="netstandard1.6\Cake.Fastlane.dll" target="lib/netstandard1.6" /> 
+    <file src="netstandard1.6\Cake.Fastlane.pdb" target="lib/netstandard1.6" />
   </files>
 </package>

@@ -10,13 +10,9 @@ BuildParameters.SetParameters(context: Context,
                             repositoryName: "Cake.Fastlane",  
                             appVeyorAccountName: "RLittlesII",
                             shouldRunDupFinder: false,
-                            shouldRunInspectCode: false,
-                            shouldRunIntegrationTests: true,
-                            integrationTestScriptPath: "./tests/integration/test.cake");
+                            shouldRunInspectCode: false);
 
 BuildParameters.PrintParameters(Context);
-
-BuildParameters.Tasks.AppVeyorTask.IsDependentOn("Run-Integration-Tests");
 
 ToolSettings.SetToolSettings(context: Context,
                             dupFinderExcludePattern: new string[] { BuildParameters.RootDirectoryPath + "/src/Cake.Fastlane.Tests/*.cs" }, 
