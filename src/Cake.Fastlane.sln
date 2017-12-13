@@ -1,0 +1,50 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.15
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5566CF64-2C66-4B3D-A098-678DA8510C03}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution", "solution", "{BBED9237-B10E-482D-BBB2-85954307B55A}"
+	ProjectSection(SolutionItems) = preProject
+		..\build.ps1 = ..\build.ps1
+		..\build.sh = ..\build.sh
+		..\GitVersion.yml = ..\GitVersion.yml
+		..\tools\packages.config = ..\tools\packages.config
+		..\recipe.cake = ..\recipe.cake
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{C1CDD8F5-93C9-4DFC-A812-CEA4251D7337}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cake.Fastlane", "Cake.Fastlane\Cake.Fastlane.csproj", "{190B8BD6-1C8E-4B59-B454-F08292C1E6CA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cake.Fastlane.Tests", "Cake.Fastlane.Tests\Cake.Fastlane.Tests.csproj", "{68AF191E-8CD7-475A-BC80-F8B73CB4B377}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuspec", "nuspec", "{187A569C-7C1F-4699-8E7C-178B97F17389}"
+	ProjectSection(SolutionItems) = preProject
+		..\nuspec\nuget\Cake.Fastlane.nuspec = ..\nuspec\nuget\Cake.Fastlane.nuspec
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{190B8BD6-1C8E-4B59-B454-F08292C1E6CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{190B8BD6-1C8E-4B59-B454-F08292C1E6CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{190B8BD6-1C8E-4B59-B454-F08292C1E6CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{190B8BD6-1C8E-4B59-B454-F08292C1E6CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68AF191E-8CD7-475A-BC80-F8B73CB4B377}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68AF191E-8CD7-475A-BC80-F8B73CB4B377}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68AF191E-8CD7-475A-BC80-F8B73CB4B377}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68AF191E-8CD7-475A-BC80-F8B73CB4B377}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{190B8BD6-1C8E-4B59-B454-F08292C1E6CA} = {5566CF64-2C66-4B3D-A098-678DA8510C03}
+		{68AF191E-8CD7-475A-BC80-F8B73CB4B377} = {C1CDD8F5-93C9-4DFC-A812-CEA4251D7337}
+	EndGlobalSection
+EndGlobal

@@ -93,6 +93,9 @@ ipch/
 *.vspx
 *.sap
 
+# Visual Studio Code
+.vscode
+
 # TFS 2012 Local Workspace
 $tf/
 
@@ -275,8 +278,12 @@ __pycache__/
 *.pyc
 
 # Cake - Uncomment if you are using it
-# tools/**
-# !tools/packages.config
+tools/**
+!tools/packages.config
+BuildArtifacts/**
+
+# dotnet Core
+.dotnet/**
 
 # Telerik's JustMock configuration file
 *.jmconfig
