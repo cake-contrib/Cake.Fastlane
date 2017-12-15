@@ -26,7 +26,7 @@ namespace Cake.Fastlane
         /// <summary>
         /// Gets or sets a value indicating whether to create a new push certificate, even if the current one is active for 30 (or PEM_ACTIVE_DAYS_LIMIT) more days.
         /// </summary>
-        public bool Force { get; set; }
+        public new bool Force { get; set; }
 
         /// <summary>
         /// Gets or sets a value determining whether to Generate a p12 file additionally to a PEM file.

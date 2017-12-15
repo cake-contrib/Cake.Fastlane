@@ -1,4 +1,11 @@
-﻿#if NETCORE
+﻿/////////////////////////////////////////////////////////////////////////////////////////////////////
+// This code was taken and adapted from the Cake Build project.
+// https://github.com/cake-build/cake/blob/main/src/Cake.Core/Polyfill/EnvironmentHelper.cs
+// Copyright (c) .NET Foundation and Contributors (http://dotnetfoundation.org/)
+// Licensed under the MIT license. See LICENSE file in the project root for full license information.
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+#if NETCORE
 using System.Runtime.InteropServices;
 #else
 using System;

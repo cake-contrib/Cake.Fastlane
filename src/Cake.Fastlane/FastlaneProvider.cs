@@ -4,6 +4,7 @@ using Cake.Core.Annotations;
 
 namespace Cake.Fastlane
 {
+    /// <inheritdoc />
     /// <summary>
     /// Provides functionality for fastlane tools.
     /// </summary>
@@ -12,6 +13,7 @@ namespace Cake.Fastlane
         private readonly ICakeContext _context;
         private IFastlaneMatchProvider _fastlaneMatchProvider;
         private IFastlanePemProvider _fastlanePemProvider;
+        private IFastlaneDeliverProvider _fastlaneDeliverProvider;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FastlaneProvider"/> class.
@@ -30,6 +32,67 @@ namespace Cake.Fastlane
             }
 
             _context = context;
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Delivers the specified deliver configuration.
+        /// <example>
+        ///     <code>
+        ///         var configuration = new FastlaneDeliverConfiguration
+        ///         {
+        ///             CertificateType = CertificateType.Development,
+        ///             AppIdentifier = "com.fastlane.cake",
+        ///             ForceForNewDevices = true
+        ///         };
+        ///
+        ///         Fastlane.Deliver(configuration);
+        ///     </code>
+        /// </example>
+        /// </summary>
+        /// <param name="deliverConfiguration">The fastlane deliver configuration.</param>
+        [CakeAliasCategory("Deliver")]
+        public void Deliver(FastlaneDeliverConfiguration deliverConfiguration = null)
+        {
+            if (_fastlaneDeliverProvider == null)
+            {
+                _fastlaneDeliverProvider = new FastlaneDeliverProvider(_context.FileSystem,
+                    _context.Environment,
+                    _context.ProcessRunner,
+                    _context.Tools);
+            }
+
+            _fastlaneDeliverProvider.Deliver(deliverConfiguration ?? new FastlaneDeliverConfiguration());
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Executes fastlane deliver with the specified configuration action.
+        /// </summary>
+        /// <example>
+        ///     <code>
+        ///         Fastlane.Deliver(config =>
+        ///         {
+        ///             config.CertificateType = CertificateType.Development;
+        ///             config.AppIdentifier = "com.fastlane.cake";
+        ///             config.ForceForNewDevices = true;
+        ///         });
+        ///     </code>
+        /// </example>
+        /// <param name="action">The action to build fastlane deliver configuration.</param>
+        [CakeAliasCategory("Deliver")]
+        public void Deliver(Action<FastlaneDeliverConfiguration> action)
+        {
+            if (action == null)
+            {
+                throw new ArgumentNullException(nameof(action));
+            }
+
+            var configuration = new FastlaneDeliverConfiguration();
+
+            action(configuration);
+
+            Deliver(configuration);
         }
 
         /// <inheritdoc />
@@ -65,7 +128,7 @@ namespace Cake.Fastlane
 
         /// <inheritdoc />
         /// <summary>
-        /// Executes fastlane pem with the specified configuration action.
+        /// Executes fastlane match with the specified configuration action.
         /// </summary>
         /// <example>
         ///     <code>

@@ -33,24 +33,12 @@ namespace Cake.Fastlane
             _environment = environment;
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Executes fastlane match with the specified configuration.
         /// </summary>
-        /// <example>
-        ///     <code>
-        ///         var configuration = new MatchConfiguration
-        ///         {
-        ///             CertificateType = CertificateType.Development,
-        ///             AppIdentifier = "com.fastlane.cake",
-        ///             ForceForNewDevices = true
-        ///         };
-        ///
-        ///         Fastlane.Match(configuration);
-        ///     </code>
-        /// </example>
         /// <param name="configuration"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        [CakeAliasCategory("Match")]
         public void Match(FastlaneMatchConfiguration configuration)
         {
             if (configuration == null)
@@ -76,7 +64,6 @@ namespace Cake.Fastlane
         /// </example>
         /// <param name="action">The action.</param>
         /// <exception cref="ArgumentNullException">action</exception>
-        [CakeAliasCategory("Match")]
         public void Match(Action<FastlaneMatchConfiguration> action)
         {
             if (action == null)

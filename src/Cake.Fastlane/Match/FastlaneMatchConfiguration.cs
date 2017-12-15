@@ -22,11 +22,6 @@ namespace Cake.Fastlane
         public bool CloneBranchDirectly { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether to renew the provisioning profiles every time you run match.
-        /// </summary>
-        public bool Force { get; set; }
-
-        /// <summary>
         /// Gets or sets a value indicating whether to renew the provisioning profiles if the device count on the developer portal has changed.
         /// </summary>
         public bool ForceForNewDevices { get; set; }
@@ -50,11 +45,6 @@ namespace Cake.Fastlane
         /// Gets or sets the key chain password.
         /// </summary>
         public string KeyChainPassword { get; set; }
-
-        /// <summary>
-        /// Gets or sets the provisioning profile's platform to work with (i.e. ios, tvos)
-        /// </summary>
-        public string Platform { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether [read only].
