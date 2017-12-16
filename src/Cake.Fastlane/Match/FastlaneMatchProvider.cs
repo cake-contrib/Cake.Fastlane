@@ -17,10 +17,6 @@ namespace Cake.Fastlane
         /// </summary>
         private readonly ICakeEnvironment _environment;
 
-        private readonly IToolLocator _tools;
-        private IFileSystem _fileSystem;
-        private IProcessRunner _processRunner;
-
         /// <summary>
         /// Initializes an instance of <see cref="FastlaneMatchProvider"/>.
         /// </summary>
@@ -34,15 +30,24 @@ namespace Cake.Fastlane
             IToolLocator tools)
             : base(fileSystem, environment, processRunner, tools)
         {
-            _fileSystem = fileSystem;
             _environment = environment;
-            _processRunner = processRunner;
-            _tools = tools;
         }
 
         /// <summary>
         /// Executes fastlane match with the specified configuration.
         /// </summary>
+        /// <example>
+        ///     <code>
+        ///         var configuration = new MatchConfiguration
+        ///         {
+        ///             CertificateType = CertificateType.Development,
+        ///             AppIdentifier = "com.fastlane.cake",
+        ///             ForceForNewDevices = true
+        ///         };
+        ///
+        ///         Fastlane.Match(configuration);
+        ///     </code>
+        /// </example>
         /// <param name="configuration"></param>
         /// <exception cref="ArgumentNullException"></exception>
         [CakeAliasCategory("Match")]
@@ -54,6 +59,36 @@ namespace Cake.Fastlane
             }
 
             Run(configuration, ArgumentBuilder(configuration));
+        }
+
+        /// <summary>
+        /// Executes fastlane match with the specified configuration action.
+        /// </summary>
+        /// <example>
+        ///     <code>
+        ///         Fastlane.Match(config =>
+        ///         {
+        ///             config.CertificateType = CertificateType.Development;
+        ///             config.AppIdentifier = "com.fastlane.cake";
+        ///             config.ForceForNewDevices = true;
+        ///         });
+        ///     </code>
+        /// </example>
+        /// <param name="action">The action.</param>
+        /// <exception cref="ArgumentNullException">action</exception>
+        [CakeAliasCategory("Match")]
+        public void Match(Action<MatchConfiguration> action)
+        {
+            if (action == null)
+            {
+                throw new ArgumentNullException(nameof(action));
+            }
+
+            var configuration = new MatchConfiguration();
+
+            action(configuration);
+
+            Match(configuration);
         }
 
         /// <summary>

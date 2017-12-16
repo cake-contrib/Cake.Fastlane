@@ -3,5 +3,14 @@ using Cake.Fastlane;
 Task("Fastlane.Match")
     .Does(() =>
     {
-        Context.Fastlane().Match(FastlaneMatchConfiguration.Configuration);
+        Fastlane.Match(FastlaneMatchConfiguration.Configuration);
+    });
+
+Task("Fastlane.Match.Action")
+    .Does(() =>
+    {
+        Fastlane.Match(config =>
+        {
+            config = FastlaneMatchConfiguration.Configuration;
+        });
     });

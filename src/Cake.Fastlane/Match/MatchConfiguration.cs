@@ -2,10 +2,11 @@
 
 namespace Cake.Fastlane
 {
+    /// <inheritdoc />
     /// <summary>
     /// Fastlane match configuration options.
     /// </summary>
-    /// <seealso cref="FastlaneConfiguration" />
+    /// <seealso cref="T:Cake.Fastlane.FastlaneConfiguration" />
     public class MatchConfiguration : FastlaneConfiguration
     {
         /// <summary>
