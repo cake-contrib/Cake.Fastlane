@@ -2,7 +2,7 @@
 
 Cake addin that extends Cake with support for fastlane tools.
 
-[![License](http://img.shields.io/:license-mit-blue.svg)](https://raw.githubusercontent.com/RLittlesII/Cake.SqlPackage/master/LICENSE)
+[![License](http://img.shields.io/:license-mit-blue.svg)](https://raw.githubusercontent.com/RLittlesII/Cake.Fastlane/master/LICENSE)
 
 | Build server                | Platform     | Dev    | Master             |
 |-----------------------------|--------------|--------------|---------------------------------------------------------------------------------------------------------------------------|
@@ -10,11 +10,9 @@ Cake addin that extends Cake with support for fastlane tools.
 | Travis                      | Linux / OS X | [![Build Status](https://travis-ci.org/RLittlesII/Cake.Fastlane.svg?branch=dev)](https://travis-ci.org/RLittlesII/Cake.Fastlane) | [![Build Status](https://travis-ci.org/RLittlesII/Cake.Fastlane.svg?branch=master)](https://travis-ci.org/RLittlesII/Cake.Fastlane) |
 
 ## Information
-
-| | Stable | Pre-release |
-|---|---|---|
-|NuGet|[![NuGet](https://img.shields.io/nuget/v/Cake.Fastlane.svg)](https://www.nuget.org/packages/Cake.Fastlane)|[![MyGet](https://img.shields.io/myget/RLittlesII/vpre/Cake.Fastlane.svg?label=MyGet)](https://www.myget.org/feed/RLittlesII/package/nuget/Cake.Fastlane)|
+| | Stable |
+|---|---|
+|NuGet|[![NuGet](https://img.shields.io/nuget/v/Cake.Fastlane.svg)](https://www.nuget.org/packages/Cake.Fastlane)
 
 ## Code Coverage
-
-[![Coverage Status](https://coveralls.io/repos/github/RLittlesII/Cake.Fastlane/badge.svg?branch=develop)](https://coveralls.io/github/RLittlesII/Cake.Fastlane?branch=develop)
+[![Coverage Status](https://coveralls.io/repos/github/RLittlesII/Cake.Fastlane/badge.svg?branch=dev)](https://coveralls.io/github/RLittlesII/Cake.Fastlane?branch=dev)

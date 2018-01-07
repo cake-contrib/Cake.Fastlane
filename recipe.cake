@@ -8,8 +8,7 @@ BuildParameters.SetParameters(context: Context,
                             sourceDirectoryPath: "./src",
                             repositoryOwner: "RLittlesII",  
                             repositoryName: "Cake.Fastlane",  
-                            appVeyorAccountName: "RLittlesII", 
-                            shouldRunCodecov: false);
+                            appVeyorAccountName: "RLittlesII");
 
 BuildParameters.PrintParameters(Context);
 
