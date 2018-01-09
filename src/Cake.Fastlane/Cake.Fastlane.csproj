@@ -11,6 +11,7 @@
     <Copyright>Copyright (c) 2017 Rodney Littles II</Copyright>
     <PackageTags>cake script build fastlane ios mobile</PackageTags>
     <PackageIconUrl>https://cdn.rawgit.com/cake-contrib/graphics/a5cf0f881c390650144b2243ae551d5b9f836196/png/cake-contrib-medium.png</PackageIconUrl>
+    <DebugType>full</DebugType>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
