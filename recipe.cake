@@ -9,7 +9,8 @@ BuildParameters.SetParameters(context: Context,
                             repositoryOwner: "RLittlesII",  
                             repositoryName: "Cake.Fastlane",  
                             appVeyorAccountName: "RLittlesII",
-                            shouldRunCodecov: false);
+                            shouldRunCodecov: false,
+                            shouldRunDotNetCorePack: true);
 
 BuildParameters.PrintParameters(Context);
 

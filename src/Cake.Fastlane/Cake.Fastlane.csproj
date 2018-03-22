@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>net46;netstandard1.6</TargetFrameworks>
     <Version>0.0.0</Version>
-    <Description>Cake addIn that extends Cake with support for fastlane tools.</Description>
+    <Description>Cake add in that extends Cake with support for fastlane tools.</Description>
     <RepositoryUrl>https://github.com/RLittlesII/Cake.Fastlane</RepositoryUrl>
     <PackageLicenseUrl>https://github.com/RLittlesII/Cake.Fastlane/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/RLittlesII/Cake.Fastlane/</PackageProjectUrl>
