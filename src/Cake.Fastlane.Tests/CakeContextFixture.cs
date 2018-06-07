@@ -9,11 +9,12 @@ namespace Cake.Fastlane.Tests
 {
     public sealed class CakeContextFixture
     {
-        public IFileSystem FileSystem { get; set; }
+        public ICakeArguments Arguments { get; set; }
+        public ICakeDataService DataService { get; set; }
         public ICakeEnvironment Environment { get; set; }
+        public IFileSystem FileSystem { get; set; }
         public IGlobber Globber { get; set; }
         public ICakeLog Log { get; set; }
-        public ICakeArguments Arguments { get; set; }
         public IProcessRunner ProcessRunner { get; set; }
         public IRegistry Registry { get; set; }
         public IToolLocator Tools { get; set; }
@@ -28,12 +29,7 @@ namespace Cake.Fastlane.Tests
             ProcessRunner = Substitute.For<IProcessRunner>();
             Registry = Substitute.For<IRegistry>();
             Tools = Substitute.For<IToolLocator>();
-        }
-
-        public CakeContext CreateContext()
-        {
-            return new CakeContext(FileSystem, Environment, Globber,
-                Log, Arguments, ProcessRunner, Registry, Tools);
+            DataService = Substitute.For<ICakeDataService>();
         }
 
         public CakeContext CreateContext(PlatformFamily platform)
@@ -41,7 +37,7 @@ namespace Cake.Fastlane.Tests
             Environment.Platform.Family.Returns(platform);
 
             return new CakeContext(FileSystem, Environment, Globber,
-                Log, Arguments, ProcessRunner, Registry, Tools);
+                Log, Arguments, ProcessRunner, Registry, Tools, DataService);
         }
     }
 }
