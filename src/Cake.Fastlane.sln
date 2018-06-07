@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.15
+VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5566CF64-2C66-4B3D-A098-678DA8510C03}"
 EndProject
@@ -19,11 +19,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cake.Fastlane", "Cake.Fastlane\Cake.Fastlane.csproj", "{190B8BD6-1C8E-4B59-B454-F08292C1E6CA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cake.Fastlane.Tests", "Cake.Fastlane.Tests\Cake.Fastlane.Tests.csproj", "{68AF191E-8CD7-475A-BC80-F8B73CB4B377}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuspec", "nuspec", "{187A569C-7C1F-4699-8E7C-178B97F17389}"
-	ProjectSection(SolutionItems) = preProject
-		..\nuspec\nuget\Cake.Fastlane.nuspec = ..\nuspec\nuget\Cake.Fastlane.nuspec
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,5 +41,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{190B8BD6-1C8E-4B59-B454-F08292C1E6CA} = {5566CF64-2C66-4B3D-A098-678DA8510C03}
 		{68AF191E-8CD7-475A-BC80-F8B73CB4B377} = {C1CDD8F5-93C9-4DFC-A812-CEA4251D7337}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5ED9F0DA-21D7-4099-88F5-DB3C9A559B2B}
 	EndGlobalSection
 EndGlobal
