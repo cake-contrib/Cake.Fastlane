@@ -10,7 +10,7 @@ namespace Cake.Fastlane
     /// Provides functionality for fastlane match tool.
     /// </summary>
     /// <seealso cref="IFastlaneMatchProvider" />
-    public class FastlaneMatchProvider : FastlaneTool<MatchConfiguration>, IFastlaneMatchProvider
+    public class FastlaneMatchProvider : FastlaneTool<FastlaneMatchConfiguration>, IFastlaneMatchProvider
     {
         /// <summary>
         /// The environment
@@ -51,7 +51,7 @@ namespace Cake.Fastlane
         /// <param name="configuration"></param>
         /// <exception cref="ArgumentNullException"></exception>
         [CakeAliasCategory("Match")]
-        public void Match(MatchConfiguration configuration)
+        public void Match(FastlaneMatchConfiguration configuration)
         {
             if (configuration == null)
             {
@@ -77,14 +77,14 @@ namespace Cake.Fastlane
         /// <param name="action">The action.</param>
         /// <exception cref="ArgumentNullException">action</exception>
         [CakeAliasCategory("Match")]
-        public void Match(Action<MatchConfiguration> action)
+        public void Match(Action<FastlaneMatchConfiguration> action)
         {
             if (action == null)
             {
                 throw new ArgumentNullException(nameof(action));
             }
 
-            var configuration = new MatchConfiguration();
+            var configuration = new FastlaneMatchConfiguration();
 
             action(configuration);
 
@@ -97,7 +97,7 @@ namespace Cake.Fastlane
         /// </summary>
         /// <param name="match"></param>
         /// <returns></returns>
-        private ProcessArgumentBuilder ArgumentBuilder(MatchConfiguration match)
+        private ProcessArgumentBuilder ArgumentBuilder(FastlaneMatchConfiguration match)
         {
             var builder = new ProcessArgumentBuilder();
 
@@ -208,7 +208,7 @@ namespace Cake.Fastlane
                 builder.AppendSwitch("-o", match.Platform);
             }
 
-            return builder;
+            return builder.RenderSafe();
         }
     }
 }

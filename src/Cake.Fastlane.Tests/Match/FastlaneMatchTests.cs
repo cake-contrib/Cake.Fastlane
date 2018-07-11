@@ -253,7 +253,7 @@ namespace Cake.Fastlane.Tests.Match
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"match -p {fixture.Settings.KeyChainPassword}", result.Args);
+                Assert.Equal($"match -p [REDACTED]", result.Args);
             }
 
             [Fact]

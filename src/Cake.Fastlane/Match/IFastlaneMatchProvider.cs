@@ -11,12 +11,12 @@ namespace Cake.Fastlane
         /// Executes fastlane match with the specified configuration.
         /// </summary>
         /// <param name="matchConfiguration">The fastlane match configuration.</param>
-        void Match(MatchConfiguration matchConfiguration = null);
+        void Match(FastlaneMatchConfiguration matchConfiguration = null);
 
         /// <summary>
         /// Executes fastlane match with the specified configuration action.
         /// </summary>
         /// <param name="action">The action.</param>
-        void Match(Action<MatchConfiguration> action);
+        void Match(Action<FastlaneMatchConfiguration> action);
     }
 }

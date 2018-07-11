@@ -32,19 +32,19 @@ namespace Cake.Fastlane
         }
 
         /// <summary>
+        /// Gets the possible names of the tool executable.
+        /// </summary>
+        /// <returns>
+        /// The tool executable name.
+        /// </returns>
+        protected override IEnumerable<string> GetToolExecutableNames() => new[] { "fastlane.exe", "fastlane" };
+
+        /// <summary>
         /// Gets the name of the tool.
         /// </summary>
         /// <returns>
         /// The name of the tool.
         /// </returns>
         protected override string GetToolName() => "fastlane";
-
-        /// <summary>
-        /// Gets the possible names of the tool executable.
-        /// </summary>
-        /// <returns>
-        /// The tool executable name.
-        /// </returns>
-        protected override IEnumerable<string> GetToolExecutableNames() => new[] {"fastlane.exe", "fastlane"};
     }
 }
