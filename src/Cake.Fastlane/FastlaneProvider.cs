@@ -14,6 +14,7 @@ namespace Cake.Fastlane
         private IFastlaneMatchProvider _fastlaneMatchProvider;
         private IFastlanePemProvider _fastlanePemProvider;
         private IFastlaneDeliverProvider _fastlaneDeliverProvider;
+        private IFastlanePilotProvider _fastlanePilotProvider;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FastlaneProvider"/> class.
@@ -171,9 +172,9 @@ namespace Cake.Fastlane
         ///          Fastlane.Pem(configuration);
         ///      </code>
         ///  </example>
-        /// <param name="configuration"></param>
+        /// <param name="pemConfiguration"></param>
         [CakeAliasCategory("Pem")]
-        public void Pem(FastlanePemConfiguration configuration)
+        public void Pem(FastlanePemConfiguration pemConfiguration)
         {
             if (_fastlanePemProvider == null)
             {
@@ -183,7 +184,7 @@ namespace Cake.Fastlane
                 _context.Tools);
             }
 
-            _fastlanePemProvider.Pem(configuration);
+            _fastlanePemProvider.Pem(pemConfiguration);
         }
 
         /// <inheritdoc />
@@ -213,6 +214,68 @@ namespace Cake.Fastlane
             configurator(configuration);
 
             Pem(configuration);
+        }
+
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Executes fastlane pilot with the specified configuration.
+        /// </summary>
+        ///  <example>
+        ///      <code>
+        ///          var configuration = new FastlanePemConfiguration
+        ///          {
+        ///             AppIdentifier = "com.fastlane.cake",
+        ///             Distribute = true,
+        ///             WaitProcessingInterval = 45
+        ///          };
+        ///
+        ///          Fastlane.Pilot(configuration);
+        ///      </code>
+        ///  </example>
+        /// <param name="pilotConfiguration"></param>
+        [CakeAliasCategory("Pilot")]
+        public void Pilot(FastlanePilotConfiguration pilotConfiguration = null)
+        {
+            if (_fastlanePilotProvider == null)
+            {
+                _fastlanePilotProvider = new FastlanePilotProvider(_context.FileSystem,
+                    _context.Environment,
+                    _context.ProcessRunner,
+                    _context.Tools);
+            }
+
+            _fastlanePilotProvider.Pilot(pilotConfiguration);
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Executes fastlane pilot with the specified configuration action.
+        /// </summary>
+        ///  <example>
+        ///      <code>
+        ///          Fastlane.Pilot(config =>
+        ///             {
+        ///                 config.AppIdentifier = "com.fastlane.cake";
+        ///                 config.Distribute = true;
+        ///                 config.WaitProcessingInterval = 45;
+        ///             });
+        ///      </code>
+        ///  </example>
+        /// <param name="configurator"></param>
+        [CakeAliasCategory("Pilot")]
+        public void Pilot(Action<FastlanePilotConfiguration> configurator)
+        {
+            if (configurator == null)
+            {
+                throw new ArgumentNullException(nameof(configurator));
+            }
+
+            var configuration = new FastlanePilotConfiguration();
+
+            configurator(configuration);
+
+            Pilot(configuration);
         }
     }
 }
