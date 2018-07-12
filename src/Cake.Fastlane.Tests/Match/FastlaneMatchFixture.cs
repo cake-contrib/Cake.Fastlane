@@ -2,7 +2,7 @@
 
 namespace Cake.Fastlane.Tests.Match
 {
-    internal class FastlaneMatchFixture : ToolFixture<MatchConfiguration>
+    internal class FastlaneMatchFixture : ToolFixture<FastlaneMatchConfiguration>
     {
         public FastlaneMatchFixture()
             : base("fastlane.exe")

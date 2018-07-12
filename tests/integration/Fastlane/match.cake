@@ -11,6 +11,6 @@ Task("Fastlane.Match.Action")
     {
         Fastlane.Match(config =>
         {
-            config = FastlaneMatchConfiguration.Configuration;
+            return FastlaneMatchConfiguration.Configuration;
         });
     });

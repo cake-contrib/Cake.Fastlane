@@ -17,8 +17,3 @@ dotnet: 2.1.4
   
 script:
   - ./build.sh --verbosity diagnostic
-
-cache:
-  directories:
-  - .cake/tools
-    
