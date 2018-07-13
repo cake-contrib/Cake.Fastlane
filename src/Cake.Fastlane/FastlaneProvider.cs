@@ -1,4 +1,5 @@
 ﻿using System;
+using Cake.Common.Diagnostics;
 using Cake.Core;
 using Cake.Core.Annotations;
 
@@ -15,6 +16,7 @@ namespace Cake.Fastlane
         private IFastlanePemProvider _fastlanePemProvider;
         private IFastlaneDeliverProvider _fastlaneDeliverProvider;
         private IFastlanePilotProvider _fastlanePilotProvider;
+        private IFastlaneSupplyProvider _fastlaneSupplyProvider;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FastlaneProvider"/> class.
@@ -25,11 +27,6 @@ namespace Cake.Fastlane
             if (context == null)
             {
                 throw new ArgumentNullException(nameof(context));
-            }
-
-            if (context.Environment.Platform.Family != PlatformFamily.OSX)
-            {
-                throw new CakeException("Use of fastlane tools requires Mac OSX");
             }
 
             _context = context;
@@ -141,7 +138,7 @@ namespace Cake.Fastlane
         ///         });
         ///     </code>
         /// </example>
-        /// <param name="configurator"></param>
+        /// <param name="configurator">The fastlane match configuration action.</param>
         [CakeAliasCategory("Match")]
         public void Match(Action<FastlaneMatchConfiguration> configurator)
         {
@@ -172,7 +169,7 @@ namespace Cake.Fastlane
         ///          Fastlane.Pem(configuration);
         ///      </code>
         ///  </example>
-        /// <param name="pemConfiguration"></param>
+        /// <param name="pemConfiguration">The fastlane pem configuration.</param>
         [CakeAliasCategory("Pem")]
         public void Pem(FastlanePemConfiguration pemConfiguration)
         {
@@ -200,7 +197,7 @@ namespace Cake.Fastlane
         ///             });
         ///      </code>
         ///  </example>
-        /// <param name="configurator"></param>
+        /// <param name="configurator">The fastlane pem configuration action.</param>
         [CakeAliasCategory("Pem")]
         public void Pem(Action<FastlanePemConfiguration> configurator)
         {
@@ -223,7 +220,7 @@ namespace Cake.Fastlane
         /// </summary>
         ///  <example>
         ///      <code>
-        ///          var configuration = new FastlanePemConfiguration
+        ///          var configuration = new FastlanePilotConfiguration
         ///          {
         ///             AppIdentifier = "com.fastlane.cake",
         ///             Distribute = true,
@@ -233,7 +230,7 @@ namespace Cake.Fastlane
         ///          Fastlane.Pilot(configuration);
         ///      </code>
         ///  </example>
-        /// <param name="pilotConfiguration"></param>
+        /// <param name="pilotConfiguration">The fastlane pilot configuration.</param>
         [CakeAliasCategory("Pilot")]
         public void Pilot(FastlanePilotConfiguration pilotConfiguration = null)
         {
@@ -262,7 +259,7 @@ namespace Cake.Fastlane
         ///             });
         ///      </code>
         ///  </example>
-        /// <param name="configurator"></param>
+        /// <param name="configurator">The fastlane pilot configuration action.</param>
         [CakeAliasCategory("Pilot")]
         public void Pilot(Action<FastlanePilotConfiguration> configurator)
         {
@@ -276,6 +273,67 @@ namespace Cake.Fastlane
             configurator(configuration);
 
             Pilot(configuration);
+        }
+
+        /// <inheritdoc />
+        ///  <summary>
+        ///  Executes fastlane supply with the specified configuration.
+        ///  </summary>
+        ///   <example>
+        ///       <code>
+        ///           var configuration = new FastlaneSupplyConfiguration
+        ///           {
+        ///                 ApkFilePath = "./artifacts/android/cake.fastlane.apk",
+        ///                 SkipUploadMetadata = true,
+        ///                 SkipUploadImages = true,
+        ///                 SkipUploadScreenShots = true
+        ///           };
+        /// 
+        ///           Fastlane.Supply(configuration);
+        ///       </code>
+        ///   </example>
+        ///  <param name="supplyConfiguration">The fastlane supply configuration.</param>
+        public void Supply(FastlaneSupplyConfiguration supplyConfiguration = null)
+        {
+            if (_fastlaneSupplyProvider == null)
+            {
+                _fastlaneSupplyProvider = new FastlaneSupplyProvider(_context.FileSystem,
+                    _context.Environment,
+                    _context.ProcessRunner,
+                    _context.Tools);
+            }
+
+            _fastlaneSupplyProvider.Supply(supplyConfiguration ?? new FastlaneSupplyConfiguration());
+        }
+
+        /// <inheritdoc />
+        /// <summary>
+        /// Executes fastlane supply with the specified configuration action.
+        /// </summary>
+        ///  <example>
+        ///      <code>
+        ///          Fastlane.Supply(config =>
+        ///             {
+        ///                 config.ApkFilePath = "./artifacts/android/cake.fastlane.apk";
+        ///                 config.SkipUploadMetadata = true;
+        ///                 config.SkipUploadImages = true;
+        ///                 config.SkipUploadScreenShots = true;
+        ///             });
+        ///      </code>
+        ///  </example>
+        /// <param name="configurator">The fastlane supply configuration action.</param>
+        public void Supply(Action<FastlaneSupplyConfiguration> configurator)
+        {
+            if (configurator == null)
+            {
+                throw new ArgumentNullException(nameof(configurator));
+            }
+
+            var configuration = new FastlaneSupplyConfiguration();
+
+            configurator(configuration);
+
+            Supply(configuration);
         }
     }
 }

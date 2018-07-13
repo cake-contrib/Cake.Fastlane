@@ -142,7 +142,7 @@ namespace Cake.Fastlane.Tests.Pem
             }
 
             [Fact]
-            public void Should_Add_Pem_If_No_Configuration_Provided()
+            public void Should_Add_Action_If_No_Configuration_Provided()
             {
                 // Given
                 var fixture = new FastlanePemFixture();

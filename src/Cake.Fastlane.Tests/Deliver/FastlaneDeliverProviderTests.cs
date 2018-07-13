@@ -10,12 +10,6 @@ namespace Cake.Fastlane.Tests.Deliver
 {
     public sealed class FastlaneDeliverProviderTests
     {
-        private static readonly Func<Dictionary<string, string>, string> Aggregate = (dictionary) =>
-        {
-            return dictionary.Aggregate(string.Empty, (current, hash) => current + $"{hash.Key}:{hash.Value}")
-                .TrimEnd(',');
-        };
-
         public sealed class TheDeliverMethod
         {
             [Fact]
@@ -181,7 +175,7 @@ namespace Cake.Fastlane.Tests.Deliver
             }
 
             [Fact]
-            public void Should_Add_Deliver_If_No_Configuration_Provided()
+            public void Should_Add_Action_If_No_Configuration_Provided()
             {
                 // Given
                 var fixture = new FastlaneDeliverProviderFixture();

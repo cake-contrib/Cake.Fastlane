@@ -142,7 +142,7 @@ namespace Cake.Fastlane.Tests.Match
             }
 
             [Fact]
-            public void Should_Add_Match_If_No_Configuration_Provided()
+            public void Should_Add_Action_If_No_Configuration_Provided()
             {
                 // Given
                 var fixture = new FastlaneMatchFixture();

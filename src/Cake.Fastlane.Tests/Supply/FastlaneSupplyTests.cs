@@ -1,19 +1,20 @@
-using System;
+﻿using System;
 using Cake.Core;
+using Cake.Core.IO;
 using Cake.Testing;
 using Xunit;
 
-namespace Cake.Fastlane.Tests.Pilot
+namespace Cake.Fastlane.Tests.Supply
 {
-    public sealed class FastlanePilotTests
+    public sealed class FastlaneSupplyTests
     {
-        public sealed class ThePilotMethod
-        { 
+        public sealed class TheSupplyMethod
+        {
             [Fact]
             public void Should_Throw_If_Settings_Is_Null()
             {
                 // Given
-                var fixture = new FastlanePilotFixture();
+                var fixture = new FastlaneSupplyFixture();
                 fixture.Settings = null;
 
                 // When
@@ -27,7 +28,7 @@ namespace Cake.Fastlane.Tests.Pilot
             public void Should_Throw_If_Fastlane_Pilot_Runner_Was_Not_Found()
             {
                 // Given
-                var fixture = new FastlanePilotFixture();
+                var fixture = new FastlaneSupplyFixture();
                 fixture.GivenDefaultToolDoNotExist();
 
                 // When
@@ -44,7 +45,7 @@ namespace Cake.Fastlane.Tests.Pilot
             public void Should_Use_Fastlane_Pilot_Runner_From_Tool_Path_If_Provided(string toolPath, string expected)
             {
                 // Given
-                var fixture = new FastlanePilotFixture();
+                var fixture = new FastlaneSupplyFixture();
                 fixture.Settings.ToolPath = toolPath;
                 fixture.GivenSettingsToolPathExist();
 
@@ -59,7 +60,7 @@ namespace Cake.Fastlane.Tests.Pilot
             public void Should_Find_Fastlane_Pilot_Runner_If_Tool_Path_Not_Provided()
             {
                 // Given
-                var fixture = new FastlanePilotFixture();
+                var fixture = new FastlaneSupplyFixture();
 
                 // When
                 var result = fixture.Run();
@@ -72,7 +73,7 @@ namespace Cake.Fastlane.Tests.Pilot
             public void Should_Set_Working_Directory()
             {
                 // Given
-                var fixture = new FastlanePilotFixture();
+                var fixture = new FastlaneSupplyFixture();
 
                 // When
                 var result = fixture.Run();
@@ -85,7 +86,7 @@ namespace Cake.Fastlane.Tests.Pilot
             public void Should_Throw_If_Process_Was_Not_Started()
             {
                 // Given
-                var fixture = new FastlanePilotFixture();
+                var fixture = new FastlaneSupplyFixture();
                 fixture.GivenProcessCannotStart();
 
                 // When
@@ -100,7 +101,7 @@ namespace Cake.Fastlane.Tests.Pilot
             public void Should_Throw_If_Process_Has_A_Non_Zero_Exit_Code()
             {
                 // Given
-                var fixture = new FastlanePilotFixture();
+                var fixture = new FastlaneSupplyFixture();
                 fixture.GivenProcessExitsWithCode(1);
 
                 // When
@@ -115,7 +116,7 @@ namespace Cake.Fastlane.Tests.Pilot
             public void Should_Throw_If_Configuration_Null()
             {
                 // Given
-                var fixture = new FastlanePilotFixture();
+                var fixture = new FastlaneSupplyFixture();
                 fixture.Settings = null;
 
                 // When
@@ -130,7 +131,7 @@ namespace Cake.Fastlane.Tests.Pilot
             public void Should_Throw_If_Configuration_Null_OSX()
             {
                 // Given
-                var fixture = new FastlanePilotFixture();
+                var fixture = new FastlaneSupplyFixture();
                 fixture.Settings = null;
 
                 // When
@@ -145,349 +146,321 @@ namespace Cake.Fastlane.Tests.Pilot
             public void Should_Add_Action_If_No_Configuration_Provided()
             {
                 // Given
-                var fixture = new FastlanePilotFixture();
+                var fixture = new FastlaneSupplyFixture();
 
                 // When
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal("pilot", result.Args);
+                Assert.Equal("supply", result.Args);
             }
 
             [Fact]
-            public void Should_Add_User_Name_If_Provided()
+            public void Should_Add_Package_Name_If_Provided()
             {
                 // Given
-                var fixture = new FastlanePilotFixture();
-                fixture.Settings.UserName = "user";
+                var fixture = new FastlaneSupplyFixture();
+                fixture.Settings.PackageName = "com.cake.fastlane";
 
                 // When
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -u {fixture.Settings.UserName}", result.Args);
+                Assert.Equal($"supply -p {fixture.Settings.PackageName}", result.Args);
             }
 
             [Fact]
-            public void Should_Add_App_Identifier_If_Provided()
+            public void Should_Add_Track_If_Provided()
             {
                 // Given
-                var fixture = new FastlanePilotFixture();
-                fixture.Settings.AppIdentifier = "com.cake.fastlane";
+                var fixture = new FastlaneSupplyFixture();
+                fixture.Settings.Track = "fast track";
 
                 // When
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -a {fixture.Settings.AppIdentifier}", result.Args);
+                Assert.Equal($"supply -a {fixture.Settings.Track}", result.Args);
             }
 
             [Fact]
-            public void Should_Add_App_Platform_If_Provided()
+            public void Should_Add_Rollout_If_Provided()
             {
                 // Given
-                var fixture = new FastlanePilotFixture();
-                fixture.Settings.Platform = "osx";
+                var fixture = new FastlaneSupplyFixture();
+                fixture.Settings.Rollout = .3;
 
                 // When
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -m {fixture.Settings.Platform}", result.Args);
+                Assert.Equal($"supply -r {fixture.Settings.Rollout}", result.Args);
             }
 
             [Fact]
-            public void Should_Add_Ipa_File_Path_If_Provided()
+            public void Should_Add_Metadata_File_Path_If_Provided()
             {
                 // Given
-                var fixture = new FastlanePilotFixture();
-                fixture.Settings.IpaFilePath = "./cake.fastlane.ipa";
+                var fixture = new FastlaneSupplyFixture();
+                fixture.Settings.MetadataPath = "./artifacts/metadata";
 
                 // When
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -i \"/Working/cake.fastlane.ipa\"", result.Args);
+                Assert.Equal($"supply -m \"/Working/{fixture.Settings.MetadataPath}\"", result.Args);
             }
 
             [Fact]
-            public void Should_Add_Change_Log_Provided()
+            public void Should_Add_Key_File_Path_If_Provided()
             {
                 // Given
-                var fixture = new FastlanePilotFixture();
-                fixture.Settings.ChangeLog = "Cake is what is new.";
+                var fixture = new FastlaneSupplyFixture();
+                fixture.Settings.KeyFilePath = "./build/android/key.p12";
 
                 // When
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -w {fixture.Settings.ChangeLog}", result.Args);
+                Assert.Equal($"supply -k \"/Working/{fixture.Settings.KeyFilePath}\"", result.Args);
             }
 
             [Fact]
-            public void Should_Add_Beta_App_Description_If_Provided()
+            public void Should_Add_Issuer_If_Provided()
             {
                 // Given
-                var fixture = new FastlanePilotFixture();
-                fixture.Settings.BetaAppDescription = "Cake in the fast lane!";
+                var fixture = new FastlaneSupplyFixture();
+                fixture.Settings.Issuer = "issuer@cake.com";
 
                 // When
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -d {fixture.Settings.BetaAppDescription}", result.Args);
+                Assert.Equal($"supply -i {fixture.Settings.Issuer}", result.Args);
             }
 
             [Fact]
-            public void Should_Add_Beta_App_Feedback_Email_If_Provided()
+            public void Should_Add_Json_Key_File_Path_If_Provided()
             {
                 // Given
-                var fixture = new FastlanePilotFixture();
-                fixture.Settings.BetaAppFeedbackEmail = "feedback@dotnotreply.com";
+                var fixture = new FastlaneSupplyFixture();
+                fixture.Settings.JsonKeyFilePath = "./build/android/key.json";
 
                 // When
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -n {fixture.Settings.BetaAppFeedbackEmail}", result.Args);
+                Assert.Equal($"supply -j \"/Working/{fixture.Settings.JsonKeyFilePath}\"", result.Args);
             }
 
             [Fact]
-            public void Should_Add_Skip_Submission_If_Provided()
+            public void Should_Add_Json_Key_Data_If_Provided()
             {
                 // Given
-                var fixture = new FastlanePilotFixture();
-                fixture.Settings.SkipSubmission = true;
+                var fixture = new FastlaneSupplyFixture();
+                fixture.Settings.JsonKeyData = "{}";
 
                 // When
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -s", result.Args);
+                Assert.Equal($"supply -c {fixture.Settings.JsonKeyData}", result.Args);
             }
 
             [Fact]
-            public void Should_Add_Skip_Waiting_If_Provided()
+            public void Should_Add_Apk_File_Path_If_Provided()
             {
                 // Given
-                var fixture = new FastlanePilotFixture();
-                fixture.Settings.SkipWaiting = true;
+                var fixture = new FastlaneSupplyFixture();
+                fixture.Settings.ApkFilePath = "./cake.fastlane.apk";
 
                 // When
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -z", result.Args);
+                Assert.Equal($"supply -b \"/Working/{fixture.Settings.ApkFilePath}\"", result.Args);
             }
 
             [Fact]
-            public void Should_Add_Apple_Id_If_Provided()
+            public void Should_Add_Apk_Files_If_Provided()
             {
                 // Given
-                var fixture = new FastlanePilotFixture();
-                fixture.Settings.AppleId = "cake@appleid.com";
+                var fixture = new FastlaneSupplyFixture();
+                fixture.Settings.ApkFiles = new FilePath[] {"cake.fastlane.apk", "supply.fastlane.apk"};
 
                 // When
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -p {fixture.Settings.AppleId}", result.Args);
+                Assert.Equal("supply -u \"/Working/cake.fastlane.apk\",\"/Working/supply.fastlane.apk\"", result.Args);
             }
 
             [Fact]
-            public void Should_Add_Distribute_If_Provided()
+            public void Should_Add_AAB_If_Provided()
             {
                 // Given
-                var fixture = new FastlanePilotFixture();
-                fixture.Settings.Distribute = true;
+                var fixture = new FastlaneSupplyFixture();
+                fixture.Settings.AAB = "./cake.fastlane.aab";
 
                 // When
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal("pilot --distribute_external", result.Args);
+                Assert.Equal($"supply -f \"/Working/{fixture.Settings.AAB}\"", result.Args);
             }
 
             [Fact]
-            public void Should_Add_Demo_Account_Required_If_Provided()
+            public void Should_Add_Skip_Upload_Apk_If_Provided()
             {
                 // Given
-                var fixture = new FastlanePilotFixture();
-                fixture.Settings.DemoAccountRequired = true;
+                var fixture = new FastlaneSupplyFixture();
+                fixture.Settings.SkipUploadApk = true;
 
                 // When
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal("pilot --demo_account_required", result.Args);
+                Assert.Equal("supply --skip_upload_apk", result.Args);
             }
 
             [Fact]
-            public void Should_Add_First_Name_If_Provided()
+            public void Should_Add_Skip_Upload_Aab_If_Provided()
             {
                 // Given
-                var fixture = new FastlanePilotFixture();
-                fixture.Settings.FirstName = "Cake";
+                var fixture = new FastlaneSupplyFixture();
+                fixture.Settings.SkipUploadAAB = true;
 
                 // When
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -f {fixture.Settings.FirstName}", result.Args);
+                Assert.Equal("supply --skip_upload_aab", result.Args);
             }
 
             [Fact]
-            public void Should_Add_Last_Name_If_Provided()
+            public void Should_Add_Skip_Upload_Metadata_If_Provided()
             {
                 // Given
-                var fixture = new FastlanePilotFixture();
-                fixture.Settings.LastName = "Build";
+                var fixture = new FastlaneSupplyFixture();
+                fixture.Settings.SkipUploadMetadata = true;
 
                 // When
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -l {fixture.Settings.LastName}", result.Args);
+                Assert.Equal("supply --skip_upload_metadata", result.Args);
             }
 
             [Fact]
-            public void Should_Add_Email_If_Provided()
+            public void Should_Add_Skip_Upload_Images_If_Provided()
             {
                 // Given
-                var fixture = new FastlanePilotFixture();
-                fixture.Settings.Email = "cake@email.com";
+                var fixture = new FastlaneSupplyFixture();
+                fixture.Settings.SkipUploadImages = true;
 
                 // When
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -e {fixture.Settings.Email}", result.Args);
+                Assert.Equal("supply --skip_upload_images", result.Args);
             }
 
             [Fact]
-            public void Should_Add_Tester_File_Path_If_Provided()
+            public void Should_Add_Skip_Upload_Screen_Shots_If_Provided()
             {
                 // Given
-                var fixture = new FastlanePilotFixture();
-                fixture.Settings.TesterFilePath = "./testers.csv";
+                var fixture = new FastlaneSupplyFixture();
+                fixture.Settings.SkipUploadScreenShots = true;
 
                 // When
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -c \"/Working/testers.csv\"", result.Args);
+                Assert.Equal("supply --skip_upload_screenshots", result.Args);
             }
 
             [Fact]
-            public void Should_Add_Wait_Processing_Interval_If_Provided()
+            public void Should_Add_Promote_Track_If_Provided()
             {
                 // Given
-                var fixture = new FastlanePilotFixture();
-                fixture.Settings.WaitProcessingInterval = 45;
+                var fixture = new FastlaneSupplyFixture();
+                fixture.Settings.PromoteTrack = "com.cake.fastlane";
 
                 // When
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -k {fixture.Settings.WaitProcessingInterval}", result.Args);
+                Assert.Equal($"supply --track_promote_to {fixture.Settings.PromoteTrack}", result.Args);
             }
 
             [Fact]
-            public void Should_Add_Team_Id_If_Provided()
+            public void Should_Add_Validate_Only_If_Provided()
             {
                 // Given
-                var fixture = new FastlanePilotFixture();
-                fixture.Settings.TeamId = "456";
+                var fixture = new FastlaneSupplyFixture();
+                fixture.Settings.ValidateOnly = true;
 
                 // When
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -q {fixture.Settings.TeamId}", result.Args);
+                Assert.Equal("supply --validate_only", result.Args);
             }
 
             [Fact]
-            public void Should_Add_Team_Name_If_Provided()
+            public void Should_Add_Mapping_If_Provided()
             {
                 // Given
-                var fixture = new FastlanePilotFixture();
-                fixture.Settings.TeamName = "NY Mets";
+                var fixture = new FastlaneSupplyFixture();
+                fixture.Settings.Mapping = "./cake.fastlane.map";
 
                 // When
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -r {fixture.Settings.TeamName}", result.Args);
+                Assert.Equal($"supply -d \"/Working/{fixture.Settings.Mapping}\"", result.Args);
             }
 
             [Fact]
-            public void Should_Add_Portal_Team_Name_If_Provided()
+            public void Should_Add_Mapping_Files_If_Provided()
             {
                 // Given
-                var fixture = new FastlanePilotFixture();
-                fixture.Settings.PortalTeamId = "NY Mets";
+                var fixture = new FastlaneSupplyFixture();
+                fixture.Settings.MappingFiles = new FilePath[] {"cake.map", "fastlane.map"};
 
                 // When
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot --dev_portal_team_id {fixture.Settings.PortalTeamId}", result.Args);
+                Assert.Equal($"supply -s \"/Working/cake.map\",\"/Working/fastlane.map\"", result.Args);
             }
 
             [Fact]
-            public void Should_Add_Itc_Provider_If_Provided()
+            public void Should_Add_Root_Url_If_Provided()
             {
                 // Given
-                var fixture = new FastlanePilotFixture();
-                fixture.Settings.ItcProvider = "provider";
+                var fixture = new FastlaneSupplyFixture();
+                fixture.Settings.RootUrl = "https://fastlane.cake.com";
 
                 // When
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot --itc_provider {fixture.Settings.ItcProvider}", result.Args);
+                Assert.Equal($"supply --root_url {fixture.Settings.RootUrl}", result.Args);
             }
 
             [Fact]
-            public void Should_Add_Groups_If_Provided()
+            public void Should_Add_Check_Superseded_Tracks_If_Provided()
             {
                 // Given
-                var fixture = new FastlanePilotFixture();
-                fixture.Settings.Groups = new[] {"Team Wilson", "Brady Bunch"};
+                var fixture = new FastlaneSupplyFixture();
+                fixture.Settings.CheckSupersededTracks = true;
 
                 // When
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -g \"Team Wilson\",\"Brady Bunch\"", result.Args);
-            }
-
-            [Fact]
-            public void Should_Add_Wait_For_Build_If_Provided()
-            {
-                // Given
-                var fixture = new FastlanePilotFixture();
-                fixture.Settings.WaitForUploadedBuild = true;
-
-                // When
-                var result = fixture.Run();
-
-                // Then
-                Assert.Equal("pilot --wait_for_uploaded_build", result.Args);
-            }
-
-            [Fact]
-            public void Should_Add_Reject_Build_Waiting_For_Review_If_Provided()
-            {
-                // Given
-                var fixture = new FastlanePilotFixture();
-                fixture.Settings.RejectBuildWaitingForReview = true;
-
-                // When
-                var result = fixture.Run();
-
-                // Then
-                Assert.Equal("pilot --reject_build_waiting_for_review", result.Args);
+                Assert.Equal("supply --check_superseded_tracks", result.Args);
             }
         }
     }

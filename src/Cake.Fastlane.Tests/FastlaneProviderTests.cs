@@ -31,23 +31,6 @@ namespace Cake.Fastlane.Tests
                 Assert.IsType<ArgumentNullException>(result);
                 Assert.Equal("Value cannot be null.\nParameter name: context", result.Message);
             }
-
-            [Theory]
-            [InlineData(PlatformFamily.Unknown)]
-            [InlineData(PlatformFamily.Linux)]
-            [InlineData(PlatformFamily.Windows)]
-            public void Should_Throw_If_Platform_Not_Valid(PlatformFamily platform)
-            {
-                // Given
-                var context = new CakeContextFixture().CreateContext(platform);
-
-                // When
-                var result = Record.Exception(() => new FastlaneProvider(context));
-
-                // Then
-                Assert.NotNull(result);
-                Assert.IsType<CakeException>(result);
-            }
         }
 
         public sealed class TheDeliverMethod
@@ -153,6 +136,43 @@ namespace Cake.Fastlane.Tests
 
                 // When
                 var result = Record.Exception(() => provider.Pilot(action));
+
+                // Then
+                Assert.NotNull(result);
+                Assert.IsType<ArgumentNullException>(result);
+                Assert.Equal("Value cannot be null.\r\nParameter name: configurator", result.Message);
+            }
+        }
+
+        public sealed class TheSupplyMethod
+        {
+            private ICakeContext CakeContext => new CakeContextFixture().CreateContext(PlatformFamily.OSX);
+
+            [OSXFact]
+            public void Should_Throw_If_Action_Null_OSX()
+            {
+                // Given
+                var provider = new FastlaneProvider(CakeContext);
+                Action<FastlaneSupplyConfiguration> action = null;
+
+                // When
+                var result = Record.Exception(() => provider.Supply(action));
+
+                // Then
+                Assert.NotNull(result);
+                Assert.IsType<ArgumentNullException>(result);
+                Assert.Equal("Value cannot be null.\nParameter name: configurator", result.Message);
+            }
+
+            [WindowsFact]
+            public void Should_Throw_If_Action_Null_Windows()
+            {
+                // Given
+                var provider = new FastlaneProvider(CakeContext);
+                Action<FastlaneSupplyConfiguration> action = null;
+
+                // When
+                var result = Record.Exception(() => provider.Supply(action));
 
                 // Then
                 Assert.NotNull(result);
