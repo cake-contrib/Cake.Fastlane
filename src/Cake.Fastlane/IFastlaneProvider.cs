@@ -42,5 +42,29 @@ namespace Cake.Fastlane
         /// </summary>
         /// <param name="configurator">The fastlane pem configuration action</param>
         void Pem(Action<FastlanePemConfiguration> configurator);
+
+        /// <summary>
+        /// Executes fastlane pilot with the specified configuration.
+        /// </summary>
+        /// <param name="pilotConfiguration"></param>
+        void Pilot(FastlanePilotConfiguration pilotConfiguration = null);
+
+        /// <summary>
+        /// Executes fastlane pilot with the specified configuration action.
+        /// </summary>
+        /// <param name="configurator">The fastlane pilot configuration action</param>
+        void Pilot(Action<FastlanePilotConfiguration> configurator);
+
+        /// <summary>
+        /// Executes fastlane supply with the specified configuration action.
+        /// </summary>
+        /// <param name="supplyConfiguration">The fastlane supply configuration</param>
+        void Supply(FastlaneSupplyConfiguration supplyConfiguration = null);
+
+        /// <summary>
+        /// Executes fastlane supply with the specified configuration action.
+        /// </summary>
+        /// <param name="configurator">The fastlane supply configuration action</param>
+        void Supply(Action<FastlaneSupplyConfiguration> configurator);
     }
 }

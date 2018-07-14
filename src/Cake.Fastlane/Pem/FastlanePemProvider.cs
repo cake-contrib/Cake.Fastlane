@@ -5,6 +5,10 @@ using Cake.Core.Tooling;
 
 namespace Cake.Fastlane
 {
+    /// <summary>
+    /// Provides functionality for fastlane pem tool.
+    /// </summary>
+    /// <seealso cref="IFastlaneMatchProvider" />
     internal class FastlanePemProvider : FastlaneTool<FastlanePemConfiguration>, IFastlanePemProvider
     {
         private readonly ICakeEnvironment _environment;
