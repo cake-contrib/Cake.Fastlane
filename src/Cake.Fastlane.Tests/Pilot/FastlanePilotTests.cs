@@ -151,7 +151,29 @@ namespace Cake.Fastlane.Tests.Pilot
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal("pilot", result.Args);
+                Assert.Equal("pilot upload", result.Args);
+            }
+
+            [Theory]
+            [InlineData(PilotCommand.Upload)]
+            [InlineData(PilotCommand.Builds)]
+            [InlineData(PilotCommand.List)]
+            [InlineData(PilotCommand.Find)]
+            [InlineData(PilotCommand.Add)]
+            [InlineData(PilotCommand.Remove)]
+            [InlineData(PilotCommand.Import)]
+            [InlineData(PilotCommand.Export)]
+            public void Should_Add_Command_If_Provided(PilotCommand command)
+            {
+                // Given
+                var fixture = new FastlanePilotFixture();
+                fixture.Settings.Command = command;
+
+                // When
+                var result = fixture.Run();
+
+                // Then
+                Assert.Equal($"pilot {command.ToString().ToLower()}", result.Args);
             }
 
             [Fact]
@@ -165,7 +187,7 @@ namespace Cake.Fastlane.Tests.Pilot
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -u {fixture.Settings.UserName}", result.Args);
+                Assert.Equal($"pilot upload -u {fixture.Settings.UserName}", result.Args);
             }
 
             [Fact]
@@ -179,7 +201,7 @@ namespace Cake.Fastlane.Tests.Pilot
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -a {fixture.Settings.AppIdentifier}", result.Args);
+                Assert.Equal($"pilot upload -a {fixture.Settings.AppIdentifier}", result.Args);
             }
 
             [Fact]
@@ -193,7 +215,7 @@ namespace Cake.Fastlane.Tests.Pilot
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -m {fixture.Settings.Platform}", result.Args);
+                Assert.Equal($"pilot upload -m {fixture.Settings.Platform}", result.Args);
             }
 
             [Fact]
@@ -207,7 +229,7 @@ namespace Cake.Fastlane.Tests.Pilot
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -i \"/Working/cake.fastlane.ipa\"", result.Args);
+                Assert.Equal($"pilot upload -i \"/Working/cake.fastlane.ipa\"", result.Args);
             }
 
             [Fact]
@@ -221,7 +243,7 @@ namespace Cake.Fastlane.Tests.Pilot
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -w {fixture.Settings.ChangeLog}", result.Args);
+                Assert.Equal($"pilot upload -w {fixture.Settings.ChangeLog}", result.Args);
             }
 
             [Fact]
@@ -235,7 +257,7 @@ namespace Cake.Fastlane.Tests.Pilot
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -d {fixture.Settings.BetaAppDescription}", result.Args);
+                Assert.Equal($"pilot upload -d {fixture.Settings.BetaAppDescription}", result.Args);
             }
 
             [Fact]
@@ -249,7 +271,7 @@ namespace Cake.Fastlane.Tests.Pilot
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -n {fixture.Settings.BetaAppFeedbackEmail}", result.Args);
+                Assert.Equal($"pilot upload -n {fixture.Settings.BetaAppFeedbackEmail}", result.Args);
             }
 
             [Fact]
@@ -263,7 +285,7 @@ namespace Cake.Fastlane.Tests.Pilot
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -s", result.Args);
+                Assert.Equal($"pilot upload -s", result.Args);
             }
 
             [Fact]
@@ -277,7 +299,7 @@ namespace Cake.Fastlane.Tests.Pilot
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -z", result.Args);
+                Assert.Equal($"pilot upload -z", result.Args);
             }
 
             [Fact]
@@ -291,7 +313,7 @@ namespace Cake.Fastlane.Tests.Pilot
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -p {fixture.Settings.AppleId}", result.Args);
+                Assert.Equal($"pilot upload -p {fixture.Settings.AppleId}", result.Args);
             }
 
             [Fact]
@@ -305,7 +327,7 @@ namespace Cake.Fastlane.Tests.Pilot
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal("pilot --distribute_external", result.Args);
+                Assert.Equal("pilot upload --distribute_external", result.Args);
             }
 
             [Fact]
@@ -319,7 +341,7 @@ namespace Cake.Fastlane.Tests.Pilot
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal("pilot --demo_account_required", result.Args);
+                Assert.Equal("pilot upload --demo_account_required", result.Args);
             }
 
             [Fact]
@@ -333,7 +355,7 @@ namespace Cake.Fastlane.Tests.Pilot
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -f {fixture.Settings.FirstName}", result.Args);
+                Assert.Equal($"pilot upload -f {fixture.Settings.FirstName}", result.Args);
             }
 
             [Fact]
@@ -347,7 +369,7 @@ namespace Cake.Fastlane.Tests.Pilot
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -l {fixture.Settings.LastName}", result.Args);
+                Assert.Equal($"pilot upload -l {fixture.Settings.LastName}", result.Args);
             }
 
             [Fact]
@@ -361,7 +383,7 @@ namespace Cake.Fastlane.Tests.Pilot
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -e {fixture.Settings.Email}", result.Args);
+                Assert.Equal($"pilot upload -e {fixture.Settings.Email}", result.Args);
             }
 
             [Fact]
@@ -375,7 +397,7 @@ namespace Cake.Fastlane.Tests.Pilot
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -c \"/Working/testers.csv\"", result.Args);
+                Assert.Equal($"pilot upload -c \"/Working/testers.csv\"", result.Args);
             }
 
             [Fact]
@@ -389,7 +411,7 @@ namespace Cake.Fastlane.Tests.Pilot
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -k {fixture.Settings.WaitProcessingInterval}", result.Args);
+                Assert.Equal($"pilot upload -k {fixture.Settings.WaitProcessingInterval}", result.Args);
             }
 
             [Fact]
@@ -403,7 +425,7 @@ namespace Cake.Fastlane.Tests.Pilot
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -q {fixture.Settings.TeamId}", result.Args);
+                Assert.Equal($"pilot upload -q {fixture.Settings.TeamId}", result.Args);
             }
 
             [Fact]
@@ -417,7 +439,7 @@ namespace Cake.Fastlane.Tests.Pilot
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -r {fixture.Settings.TeamName}", result.Args);
+                Assert.Equal($"pilot upload -r {fixture.Settings.TeamName}", result.Args);
             }
 
             [Fact]
@@ -431,7 +453,7 @@ namespace Cake.Fastlane.Tests.Pilot
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot --dev_portal_team_id {fixture.Settings.PortalTeamId}", result.Args);
+                Assert.Equal($"pilot upload --dev_portal_team_id {fixture.Settings.PortalTeamId}", result.Args);
             }
 
             [Fact]
@@ -445,7 +467,7 @@ namespace Cake.Fastlane.Tests.Pilot
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot --itc_provider {fixture.Settings.ItcProvider}", result.Args);
+                Assert.Equal($"pilot upload --itc_provider {fixture.Settings.ItcProvider}", result.Args);
             }
 
             [Fact]
@@ -459,7 +481,7 @@ namespace Cake.Fastlane.Tests.Pilot
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal($"pilot -g \"Team Wilson\",\"Brady Bunch\"", result.Args);
+                Assert.Equal($"pilot upload -g \"Team Wilson\",\"Brady Bunch\"", result.Args);
             }
 
             [Fact]
@@ -473,7 +495,7 @@ namespace Cake.Fastlane.Tests.Pilot
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal("pilot --wait_for_uploaded_build", result.Args);
+                Assert.Equal("pilot upload --wait_for_uploaded_build", result.Args);
             }
 
             [Fact]
@@ -487,7 +509,7 @@ namespace Cake.Fastlane.Tests.Pilot
                 var result = fixture.Run();
 
                 // Then
-                Assert.Equal("pilot --reject_build_waiting_for_review", result.Args);
+                Assert.Equal("pilot upload --reject_build_waiting_for_review", result.Args);
             }
         }
     }
