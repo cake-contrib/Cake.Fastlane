@@ -21,6 +21,14 @@ namespace Cake.Fastlane
         }
 
         /// <summary>
+        /// Gets or sets the command to run with pilot.
+        /// </summary>
+        /// <value>
+        /// The command.
+        /// </value>
+        public PilotCommand Command { get; set; }
+
+        /// <summary>
         /// Gets or sets the path to the ipa file to upload.
         /// </summary>
         public FilePath IpaFilePath { get; set; }
@@ -62,7 +70,7 @@ namespace Cake.Fastlane
         public bool Distribute { get; set; }
 
         /// <summary>
-        /// Gets or sets a value indicating whether to notify testers.
+        /// Gets or sets a value indicating whether to notify external testers.
         /// </summary>
         public bool Notify { get; set; }
 
