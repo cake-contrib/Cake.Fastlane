@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using Cake.Core;
 using Cake.Core.IO;
@@ -48,6 +49,8 @@ namespace Cake.Fastlane
             var builder = new ProcessArgumentBuilder();
 
             builder.Append("pilot");
+
+            builder.Append(configuration.Command.ToString().ToLower());
 
             if (!string.IsNullOrEmpty(configuration.UserName))
             {
@@ -106,7 +109,7 @@ namespace Cake.Fastlane
 
             if (configuration.Notify)
             {
-                //TODO: Determine how to shut this thing off
+                // TODO: This is true by default.  Not sure if providing the switch turns it off.
             }
 
             if (configuration.DemoAccountRequired)
