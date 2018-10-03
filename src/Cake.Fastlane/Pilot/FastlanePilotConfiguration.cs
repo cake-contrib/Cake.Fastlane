@@ -23,9 +23,6 @@ namespace Cake.Fastlane
         /// <summary>
         /// Gets or sets the command to run with pilot.
         /// </summary>
-        /// <value>
-        /// The command.
-        /// </value>
         public PilotCommand Command { get; set; }
 
         /// <summary>

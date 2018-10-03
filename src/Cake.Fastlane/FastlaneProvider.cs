@@ -35,6 +35,7 @@ namespace Cake.Fastlane
         /// <inheritdoc />
         /// <summary>
         /// Delivers the specified deliver configuration.
+        /// </summary>
         /// <example>
         ///     <code>
         ///         var configuration = new FastlaneDeliverConfiguration
@@ -47,7 +48,6 @@ namespace Cake.Fastlane
         ///         Fastlane.Deliver(configuration);
         ///     </code>
         /// </example>
-        /// </summary>
         /// <param name="deliverConfiguration">The fastlane deliver configuration.</param>
         [CakeAliasCategory("Deliver")]
         public void Deliver(FastlaneDeliverConfiguration deliverConfiguration = null)

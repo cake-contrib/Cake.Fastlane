@@ -6,9 +6,14 @@ using Cake.Core.Tooling;
 
 namespace Cake.Fastlane
 {
+    /// <summary>
+    /// Provides functionality for fastlane supply tool.
+    /// </summary>
+    /// <seealso cref="Cake.Fastlane.FastlaneTool{Cake.Fastlane.FastlaneSupplyConfiguration}" />
+    /// <seealso cref="Cake.Fastlane.IFastlaneSupplyProvider" />
     internal class FastlaneSupplyProvider : FastlaneTool<FastlaneSupplyConfiguration>, IFastlaneSupplyProvider
     {
-        private ICakeEnvironment _environment;
+        private readonly ICakeEnvironment _environment;
 
         public FastlaneSupplyProvider(IFileSystem fileSystem,
             ICakeEnvironment environment,
@@ -18,6 +23,11 @@ namespace Cake.Fastlane
             _environment = environment;
         }
 
+        /// <summary>
+        /// Supplies the specified configuration.
+        /// </summary>
+        /// <param name="configuration">The configuration.</param>
+        /// <exception cref="ArgumentNullException">configuration</exception>
         public void Supply(FastlaneSupplyConfiguration configuration)
         {
             if (configuration == null)

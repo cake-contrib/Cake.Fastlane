@@ -10,6 +10,9 @@ namespace Cake.Fastlane
     /// <seealso cref="Cake.Fastlane.FastlaneConfiguration" />
     public class FastlaneSupplyConfiguration : FastlaneConfiguration
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FastlaneSupplyConfiguration"/> class.
+        /// </summary>
         public FastlaneSupplyConfiguration()
         {
             ApkFiles = MappingFiles = Enumerable.Empty<FilePath>();
