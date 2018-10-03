@@ -1,4 +1,6 @@
-﻿namespace Cake.Fastlane
+﻿using Cake.Core.IO;
+
+namespace Cake.Fastlane
 {
     /// <summary>
     /// Interface that represents fastlane deliver.

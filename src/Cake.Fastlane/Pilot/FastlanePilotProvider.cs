@@ -15,6 +15,16 @@ namespace Cake.Fastlane
     {
         private readonly ICakeEnvironment _environment;
 
+        public void Pilot(FastlanePilotConfiguration configuration)
+        {
+            if (configuration == null)
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
+
+            Run(configuration, ArgumentBuilder(configuration));
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="FastlanePilotProvider"/> class.
         /// </summary>
@@ -28,22 +38,6 @@ namespace Cake.Fastlane
             IToolLocator tools) : base(fileSystem, environment, processRunner, tools)
         {
             _environment = environment;
-        }
-
-        /// <inheritdoc />
-        /// <summary>
-        /// Executes fastlane pilot with the specified configuration.
-        /// </summary>
-        /// <param name="configuration"></param>
-        /// <exception cref="T:System.ArgumentNullException">configuration</exception>
-        public void Pilot(FastlanePilotConfiguration configuration)
-        {
-            if (configuration == null)
-            {
-                throw new ArgumentNullException(nameof(configuration));
-            }
-
-            Run(configuration, ArgumentBuilder(configuration));
         }
 
         /// <summary>

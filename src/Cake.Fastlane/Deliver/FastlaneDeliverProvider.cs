@@ -15,12 +15,6 @@ namespace Cake.Fastlane
     {
         private readonly ICakeEnvironment _environment;
 
-        private readonly Func<Dictionary<string, string>, string> Aggregate = (dictionary) =>
-                {
-                    return dictionary.Aggregate(string.Empty, (current, hash) => current + $"{hash.Key}:{hash.Value}")
-                        .TrimEnd(',');
-                };
-
         /// <summary>
         /// Initializes a new instance of the <see cref="FastlaneDeliverProvider"/> class.
         /// </summary>
@@ -31,7 +25,8 @@ namespace Cake.Fastlane
         public FastlaneDeliverProvider(IFileSystem fileSystem,
             ICakeEnvironment environment,
             IProcessRunner processRunner,
-            IToolLocator tools) : base(fileSystem, environment, processRunner, tools)
+            IToolLocator tools)
+            : base(fileSystem, environment, processRunner, tools)
         {
             _environment = environment;
         }
@@ -51,6 +46,8 @@ namespace Cake.Fastlane
             Run(configuration, ArgumentBuilder(configuration));
         }
 
+        protected override string GetToolName() => ToolName;
+
         /// <summary>
         /// https://github.com/fastlane/fastlane/blob/master/deliver/lib/deliver/options.rb
         /// </summary>
@@ -61,6 +58,11 @@ namespace Cake.Fastlane
             var builder = new ProcessArgumentBuilder();
 
             builder.Append("deliver");
+
+            if (configuration.UseBundleExecution)
+            {
+                ToolName = BundleExecution;
+            }
 
             if (!string.IsNullOrWhiteSpace(configuration.AppIdentifier))
             {
@@ -288,7 +290,7 @@ namespace Cake.Fastlane
                 builder.AppendSwitch("--marketing_url", configuration.MarketingUrl);
             }
 
-            return builder;
+            return builder.RenderSafe();
         }
     }
 }

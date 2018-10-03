@@ -23,20 +23,11 @@ namespace Cake.Fastlane
         /// Initializes a new instance of the <see cref="FastlaneProvider"/> class.
         /// </summary>
         /// <param name="context">The context.</param>
-        public FastlaneProvider(ICakeContext context)
-        {
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
-
-            _context = context;
-        }
+        public FastlaneProvider(ICakeContext context) => _context = context ?? throw new ArgumentNullException(nameof(context));
 
         /// <inheritdoc />
         /// <summary>
         /// Delivers the specified deliver configuration.
-        /// </summary>
         /// <example>
         ///     <code>
         ///         var configuration = new FastlaneDeliverConfiguration
@@ -49,6 +40,7 @@ namespace Cake.Fastlane
         ///         Fastlane.Deliver(configuration);
         ///     </code>
         /// </example>
+        /// </summary>
         /// <param name="deliverConfiguration">The fastlane deliver configuration.</param>
         [CakeAliasCategory("Deliver")]
         public void Deliver(FastlaneDeliverConfiguration deliverConfiguration = null)

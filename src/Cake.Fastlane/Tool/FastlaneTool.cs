@@ -15,6 +15,16 @@ namespace Cake.Fastlane
         where T : FastlaneConfiguration
     {
         /// <summary>
+        /// The tool name
+        /// </summary>
+        protected string ToolName = "fastlane";
+
+        /// <summary>
+        /// The bundle execution
+        /// </summary>
+        protected string BundleExecution = "bundle exec fastlane";
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="FastlaneTool{T}"/> class.
         /// </summary>
         /// <param name="fileSystem">The file system.</param>

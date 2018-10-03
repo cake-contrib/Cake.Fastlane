@@ -751,6 +751,22 @@ namespace Cake.Fastlane.Tests.Deliver
             }
 
             [Fact]
+            public void Should_Throw_Bundle_Exec_Process_Was_Not_Started_()
+            {
+                // Given
+                var fixture = new FastlaneDeliverProviderFixture();
+                fixture.Settings.UseBundleExecution = true;
+                fixture.GivenProcessCannotStart();
+
+                // When
+                var result = Record.Exception(() => fixture.Run());
+
+                // Then
+                Assert.IsType<CakeException>(result);
+                Assert.Equal("bundle exec fastlane: Process was not started.", result?.Message);
+            }
+
+            [Fact]
             public void Should_Throw_If_Settings_Is_Null()
             {
                 // Given

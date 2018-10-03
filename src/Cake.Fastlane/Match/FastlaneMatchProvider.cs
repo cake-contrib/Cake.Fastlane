@@ -10,7 +10,7 @@ namespace Cake.Fastlane
     /// Provides functionality for fastlane match tool.
     /// </summary>
     /// <seealso cref="IFastlaneMatchProvider" />
-    internal class FastlaneMatchProvider : FastlaneTool<FastlaneMatchConfiguration>, IFastlaneMatchProvider
+    public class FastlaneMatchProvider : FastlaneTool<FastlaneMatchConfiguration>, IFastlaneMatchProvider
     {
         /// <summary>
         /// The environment

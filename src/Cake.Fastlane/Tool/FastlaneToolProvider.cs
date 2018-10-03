@@ -7,7 +7,7 @@ namespace Cake.Fastlane
     /// <summary>
     /// Provides functionality for fastlane tool.
     /// </summary>
-    /// <seealso cref="Fastlane.FastlaneTool{Fastlane.FastlaneConfiguration}" />
+    /// <seealso cref="FastlaneConfiguration" />
     /// <seealso cref="IFastlaneToolProvider" />
     public class FastlaneToolProvider : FastlaneTool<FastlaneConfiguration>, IFastlaneToolProvider
     {

@@ -6,11 +6,7 @@ using Cake.Core.Tooling;
 
 namespace Cake.Fastlane
 {
-    /// <summary>
-    /// Provides functionality for fastlane supply tool.
-    /// </summary>
-    /// <seealso cref="Cake.Fastlane.FastlaneTool{Cake.Fastlane.FastlaneSupplyConfiguration}" />
-    /// <seealso cref="Cake.Fastlane.IFastlaneSupplyProvider" />
+#pragma warning disable CS0618 // Type or member is obsolete
     internal class FastlaneSupplyProvider : FastlaneTool<FastlaneSupplyConfiguration>, IFastlaneSupplyProvider
     {
         private readonly ICakeEnvironment _environment;
@@ -23,11 +19,6 @@ namespace Cake.Fastlane
             _environment = environment;
         }
 
-        /// <summary>
-        /// Supplies the specified configuration.
-        /// </summary>
-        /// <param name="configuration">The configuration.</param>
-        /// <exception cref="ArgumentNullException">configuration</exception>
         public void Supply(FastlaneSupplyConfiguration configuration)
         {
             if (configuration == null)
@@ -165,4 +156,5 @@ namespace Cake.Fastlane
             return builder;
         }
     }
+#pragma warning restore CS0618 // Type or member is obsolete
 }

@@ -6,6 +6,7 @@ using Xunit;
 
 namespace Cake.Fastlane.Tests.Supply
 {
+#pragma warning disable CS0618 // Type or member is obsolete
     public sealed class FastlaneSupplyTests
     {
         public sealed class TheSupplyMethod
@@ -14,8 +15,10 @@ namespace Cake.Fastlane.Tests.Supply
             public void Should_Throw_If_Settings_Is_Null()
             {
                 // Given
-                var fixture = new FastlaneSupplyFixture();
-                fixture.Settings = null;
+                var fixture = new FastlaneSupplyFixture
+                {
+                    Settings = null
+                };
 
                 // When
                 var result = Record.Exception(() => fixture.Run());
@@ -116,8 +119,10 @@ namespace Cake.Fastlane.Tests.Supply
             public void Should_Throw_If_Configuration_Null()
             {
                 // Given
-                var fixture = new FastlaneSupplyFixture();
-                fixture.Settings = null;
+                var fixture = new FastlaneSupplyFixture
+                {
+                    Settings = null
+                };
 
                 // When
                 var result = Record.Exception(() => fixture.Run());
@@ -131,8 +136,10 @@ namespace Cake.Fastlane.Tests.Supply
             public void Should_Throw_If_Configuration_Null_OSX()
             {
                 // Given
-                var fixture = new FastlaneSupplyFixture();
-                fixture.Settings = null;
+                var fixture = new FastlaneSupplyFixture
+                {
+                    Settings = null
+                };
 
                 // When
                 var result = Record.Exception(() => fixture.Run());
@@ -464,4 +471,5 @@ namespace Cake.Fastlane.Tests.Supply
             }
         }
     }
+#pragma warning restore CS0618 // Type or member is obsolete
 }

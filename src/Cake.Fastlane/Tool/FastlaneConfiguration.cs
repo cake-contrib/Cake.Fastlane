@@ -48,5 +48,10 @@ namespace Cake.Fastlane
         /// Gets or sets the team identifier.
         /// </summary>
         public string TeamId { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether [use bundle execution].
+        /// </summary>
+        public bool UseBundleExecution { get; set; }
     }
 }
