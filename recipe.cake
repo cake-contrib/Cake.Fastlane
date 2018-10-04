@@ -9,8 +9,18 @@ BuildParameters.SetParameters(context: Context,
                             repositoryOwner: "RLittlesII",  
                             repositoryName: "Cake.Fastlane",  
                             appVeyorAccountName: "RLittlesII",
+                            integrationTestScriptPath: "./tests/integration/test.cake",
+                            shouldRunIntegrationTests: true,
                             shouldRunCodecov: false,
                             shouldRunDotNetCorePack: true);
+
+Task("AzureDevOps")
+    .IsDependentOn("Publish-MyGet-Packages")
+    .IsDependentOn("Publish-Nuget-Packages")
+    .IsDependentOn("Publish-GitHub-Release")
+    .IsDependentOn("Publish-Documentation");
+
+BuildParameters.Tasks.IntegrationTestTask.WithCriteria(() => BuildParameters.IsRunningOnUnix);
 
 BuildParameters.PrintParameters(Context);
 

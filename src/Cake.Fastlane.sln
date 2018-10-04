@@ -5,14 +5,13 @@ VisualStudioVersion = 15.0.27130.2020
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{5566CF64-2C66-4B3D-A098-678DA8510C03}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution", "solution", "{BBED9237-B10E-482D-BBB2-85954307B55A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".solution", ".solution", "{BBED9237-B10E-482D-BBB2-85954307B55A}"
 	ProjectSection(SolutionItems) = preProject
-		..\build.ps1 = ..\build.ps1
-		..\build.sh = ..\build.sh
-		..\GitVersion.yml = ..\GitVersion.yml
-		..\tools\packages.config = ..\tools\packages.config
-		..\recipe.cake = ..\recipe.cake
+		..\.gitignore = ..\.gitignore
 		..\GitReleaseManager.yaml = ..\GitReleaseManager.yaml
+		..\GitVersion.yml = ..\GitVersion.yml
+		..\LICENSE = ..\LICENSE
+		..\README.md = ..\README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{C1CDD8F5-93C9-4DFC-A812-CEA4251D7337}"
@@ -20,6 +19,15 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cake.Fastlane", "Cake.Fastlane\Cake.Fastlane.csproj", "{190B8BD6-1C8E-4B59-B454-F08292C1E6CA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cake.Fastlane.Tests", "Cake.Fastlane.Tests\Cake.Fastlane.Tests.csproj", "{68AF191E-8CD7-475A-BC80-F8B73CB4B377}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{65F84FBD-7711-4837-8CD1-F55CFC995444}"
+	ProjectSection(SolutionItems) = preProject
+		..\.appveyor.yml = ..\.appveyor.yml
+		..\azure-pipelines.yml = ..\azure-pipelines.yml
+		..\build.ps1 = ..\build.ps1
+		..\build.sh = ..\build.sh
+		..\recipe.cake = ..\recipe.cake
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
