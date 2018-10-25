@@ -1,0 +1,6 @@
+pool:
+  vmImage: 'macOS-10.13'
+
+steps:
+- script: ./build.sh --target AzureDevOps --verbosity diagnostic
+  displayName: Cake.Recipe

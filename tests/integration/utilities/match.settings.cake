@@ -2,13 +2,13 @@
 
 using Cake.Fastlane;
 
-public static class FastlaneMatchConfiguration
+public static class MatchConfiguration
 {
-    public static MatchConfiguration Configuration { get; private set; }
+    public static FastlaneMatchConfiguration Configuration { get; private set; }
 
-    public static MatchConfiguration Initialize(ICakeContext context)
+    public static FastlaneMatchConfiguration Initialize(ICakeContext context)
     {
-        Configuration = new MatchConfiguration
+        Configuration = new FastlaneMatchConfiguration
         {
             GitUrl = context.EnvironmentVariable("FASTLANE_GIT_URL"),
             GitBranch = "master",
@@ -20,19 +20,19 @@ public static class FastlaneMatchConfiguration
         return Configuration;
     }
 
-    public static void WithSettings(ICakeContext context, Action<MatchConfiguration> actions)
+    public static void WithSettings(ICakeContext context, Action<FastlaneMatchConfiguration> action)
     {
-        if(actions == null)
+        if(action == null)
         {
             throw new ArgumentNullException();
         }
 
         var configuration = Initialize(context);
 
-        actions(configuration);
+        action(configuration);
 
         Configuration = configuration;
     }
 }
 
-FastlaneMatchConfiguration.Initialize(Context);
+MatchConfiguration.Initialize(Context);

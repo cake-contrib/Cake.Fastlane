@@ -1,9 +1,11 @@
-﻿namespace Cake.Fastlane
+﻿using Cake.Core.IO;
+
+namespace Cake.Fastlane
 {
     /// <summary>
     /// Interface that represents fastlane deliver.
     /// </summary>
-    public interface IFastlaneDeliverProvider
+    internal interface IFastlaneDeliverProvider
     {
         /// <summary>
         /// Executes fastlane deliver with the specified configuration.

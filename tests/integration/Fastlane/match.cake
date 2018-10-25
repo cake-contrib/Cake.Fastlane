@@ -3,7 +3,7 @@ using Cake.Fastlane;
 Task("Fastlane.Match")
     .Does(() =>
     {
-        Fastlane.Match(FastlaneMatchConfiguration.Configuration);
+        Fastlane.Match(MatchConfiguration.Configuration);
     });
 
 Task("Fastlane.Match.Action")
@@ -11,6 +11,6 @@ Task("Fastlane.Match.Action")
     {
         Fastlane.Match(config =>
         {
-            return FastlaneMatchConfiguration.Configuration;
+            config = MatchConfiguration.Configuration;
         });
     });

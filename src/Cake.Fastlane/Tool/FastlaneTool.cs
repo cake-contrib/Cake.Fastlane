@@ -4,8 +4,6 @@ using Cake.Core;
 using Cake.Core.IO;
 using Cake.Core.Tooling;
 
-[assembly: InternalsVisibleTo("Cake.Fastlane.Tests")]
-
 namespace Cake.Fastlane
 {
     /// <summary>
@@ -16,6 +14,16 @@ namespace Cake.Fastlane
     public abstract class FastlaneTool<T> : Tool<T>
         where T : FastlaneConfiguration
     {
+        /// <summary>
+        /// The tool name
+        /// </summary>
+        protected string ToolName = "fastlane";
+
+        /// <summary>
+        /// The bundle execution
+        /// </summary>
+        protected string BundleExecution = "bundle exec fastlane";
+
         /// <summary>
         /// Initializes a new instance of the <see cref="FastlaneTool{T}"/> class.
         /// </summary>

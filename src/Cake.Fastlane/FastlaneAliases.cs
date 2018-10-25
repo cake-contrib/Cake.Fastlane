@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using Cake.Core;
 using Cake.Core.Annotations;
+
+[assembly: InternalsVisibleTo("Cake.Fastlane.Tests")]
 
 namespace Cake.Fastlane
 {

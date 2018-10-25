@@ -7,7 +7,7 @@ Cake addin that extends Cake with support for fastlane tools.
 | Build server                | Platform     | Dev    | Master             |
 |-----------------------------|--------------|--------------|---------------------------------------------------------------------------------------------------------------------------|
 | AppVeyor                    | Windows      |  [![Build status](https://ci.appveyor.com/api/projects/status/bvxpbhtyrhr88bfj/branch/dev?svg=true)](https://ci.appveyor.com/project/RLittlesII/cake-fastlane/branch/dev) | [![Build status](https://ci.appveyor.com/api/projects/status/bvxpbhtyrhr88bfj/branch/master?svg=true)](https://ci.appveyor.com/project/RLittlesII/cake-fastlane/branch/master) |
-| TravisCI                    | OS X         | [![Build Status](https://travis-ci.org/RLittlesII/Cake.Fastlane.svg?branch=dev)](https://travis-ci.org/RLittlesII/Cake.Fastlane) | [![Build Status](https://travis-ci.org/RLittlesII/Cake.Fastlane.svg?branch=master)](https://travis-ci.org/RLittlesII/Cake.Fastlane) |
+| Azure Pipelines			  | OS X		 | [![Build Status](https://dev.azure.com/rlittlesii/Cake.Fastlane/_apis/build/status/Cake.Fastlane)](https://dev.azure.com/rlittlesii/Cake.Fastlane/_build/latest?definitionId=1) | |
 
 ## Information
 | | Stable |

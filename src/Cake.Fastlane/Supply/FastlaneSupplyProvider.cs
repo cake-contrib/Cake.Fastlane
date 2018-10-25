@@ -6,9 +6,10 @@ using Cake.Core.Tooling;
 
 namespace Cake.Fastlane
 {
+#pragma warning disable CS0618 // Type or member is obsolete
     internal class FastlaneSupplyProvider : FastlaneTool<FastlaneSupplyConfiguration>, IFastlaneSupplyProvider
     {
-        private ICakeEnvironment _environment;
+        private readonly ICakeEnvironment _environment;
 
         public FastlaneSupplyProvider(IFileSystem fileSystem,
             ICakeEnvironment environment,
@@ -155,4 +156,5 @@ namespace Cake.Fastlane
             return builder;
         }
     }
+#pragma warning restore CS0618 // Type or member is obsolete
 }

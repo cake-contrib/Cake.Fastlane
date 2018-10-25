@@ -1,5 +1,5 @@
 // Utilities
-#load "./utilities/settings.cake"
+#load "./utilities/match.settings.cake"
 #load "./utilities/deliver.settings.cake"
 #load "./utilities/xunit.cake"
 
