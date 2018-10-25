@@ -12,11 +12,12 @@ namespace Cake.Fastlane
     public sealed class FastlaneProvider : IFastlaneProvider
     {
         private readonly ICakeContext _context;
+        private IFastlaneDeliverProvider _fastlaneDeliverProvider;
         private IFastlaneMatchProvider _fastlaneMatchProvider;
         private IFastlanePemProvider _fastlanePemProvider;
-        private IFastlaneDeliverProvider _fastlaneDeliverProvider;
         private IFastlanePilotProvider _fastlanePilotProvider;
         private IFastlaneSupplyProvider _fastlaneSupplyProvider;
+        private IFastlaneToolProvider _fastlaneToolProvider;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="FastlaneProvider"/> class.
@@ -213,7 +214,6 @@ namespace Cake.Fastlane
             Pem(configuration);
         }
 
-
         /// <inheritdoc />
         /// <summary>
         /// Executes fastlane pilot with the specified configuration.
@@ -288,7 +288,7 @@ namespace Cake.Fastlane
         ///                 SkipUploadImages = true,
         ///                 SkipUploadScreenShots = true
         ///           };
-        /// 
+        ///
         ///           Fastlane.Supply(configuration);
         ///       </code>
         ///   </example>
@@ -334,6 +334,25 @@ namespace Cake.Fastlane
             configurator(configuration);
 
             Supply(configuration);
+        }
+
+        /// <inheritdoc />
+        ///  <example>
+        ///      <code>
+        ///          Fastlane.Update();
+        ///      </code>
+        ///  </example>
+        public void Update()
+        {
+            if (_fastlaneToolProvider == null)
+            {
+                _fastlaneToolProvider = new FastlaneToolProvider(_context.FileSystem,
+                    _context.Environment,
+                    _context.ProcessRunner,
+                    _context.Tools);
+            }
+
+            _fastlaneToolProvider.Update();
         }
     }
 }

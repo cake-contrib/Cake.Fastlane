@@ -4,8 +4,6 @@ using Cake.Core;
 using Cake.Core.IO;
 using Cake.Core.Tooling;
 
-[assembly: InternalsVisibleTo("Cake.Fastlane.Tests")]
-
 namespace Cake.Fastlane
 {
     /// <summary>
