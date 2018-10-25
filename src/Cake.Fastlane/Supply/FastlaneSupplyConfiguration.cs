@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using Cake.Core.IO;
 
@@ -42,11 +43,13 @@ namespace Cake.Fastlane
         /// <summary>
         /// Gets or sets the p12 file used to authenticate with Google.
         /// </summary>
+        [Obsolete("DEPRECATED! Use --json_key instead")]
         public FilePath KeyFilePath { get; set; }
 
         /// <summary>
         /// Gets or sets the issuer of the p12 file (email addressof the services account).
         /// </summary>
+        [Obsolete("DEPRECATED! Use --json_key instead")]
         public string Issuer { get; set; }
 
         /// <summary>
