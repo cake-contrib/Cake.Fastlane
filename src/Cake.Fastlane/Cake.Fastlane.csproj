@@ -27,7 +27,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Cake.Common" Version="0.28.0" />
-    <PackageReference Include="Cake.Core" Version="0.28.0" PrivateAssets="All" />
+    <PackageReference Include="Cake.Common" Version="0.32.1" />
+    <PackageReference Include="Cake.Core" Version="0.32.1" PrivateAssets="All" />
   </ItemGroup>
 </Project>
