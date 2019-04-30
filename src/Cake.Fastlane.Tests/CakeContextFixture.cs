@@ -1,4 +1,5 @@
 ﻿using Cake.Core;
+using Cake.Core.Configuration;
 using Cake.Core.Diagnostics;
 using Cake.Core.IO;
 using Cake.Core.Tooling;
@@ -18,6 +19,7 @@ namespace Cake.Fastlane.Tests
         public IProcessRunner ProcessRunner { get; set; }
         public IRegistry Registry { get; set; }
         public IToolLocator Tools { get; set; }
+        public ICakeConfiguration Configuration { get; set; }
 
         public CakeContextFixture()
         {
@@ -30,6 +32,7 @@ namespace Cake.Fastlane.Tests
             Registry = Substitute.For<IRegistry>();
             Tools = Substitute.For<IToolLocator>();
             DataService = Substitute.For<ICakeDataService>();
+            Configuration = Substitute.For<ICakeConfiguration>();
         }
 
         public CakeContext CreateContext(PlatformFamily platform)
@@ -37,7 +40,7 @@ namespace Cake.Fastlane.Tests
             Environment.Platform.Family.Returns(platform);
 
             return new CakeContext(FileSystem, Environment, Globber,
-                Log, Arguments, ProcessRunner, Registry, Tools, DataService);
+                Log, Arguments, ProcessRunner, Registry, Tools, DataService, Configuration);
         }
     }
 }
