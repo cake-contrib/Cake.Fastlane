@@ -1,5 +1,12 @@
 issue-labels-include:
-- Bug
 - Enhancement
-- Maintenance
+- Bug
+- Improvement
 - Documentation
+- Maintenance
+issue-labels-exclude:
+- Build
+issue-labels-alias:
+    - name:    Documentation
+      header:  Documentation
+      plural:  Documentation
