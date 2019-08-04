@@ -1,6 +1,21 @@
-pool:
-  vmImage: 'macOS-10.14'
+trigger:
+  branches:
+    include:
+      - master
+      - dev
+      - feature/*
+      - refs/tags/*
+pr:
+  autoCancel: true
+  branches:
+    include:
+      - master
+      - dev
 
-steps:
-- script: ./build.sh --target AzureDevOps --verbosity diagnostic --settings_skipverification=true
-  displayName: Cake.Recipe
+jobs:
+  - job: macOSX
+    pool:
+      vmImage: 'macOS-10.14'
+    steps:
+      - script: ./build.sh --target AzureDevOps --verbosity diagnostic --settings_skipverification=true
+        displayName: Cake.Recipe
