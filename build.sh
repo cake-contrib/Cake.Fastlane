@@ -7,8 +7,8 @@
 
 # Define directories.
 SCRIPT_DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
-TOOLS_DIR=$CAKE_PATHS_TOOLS
-NUGET_EXE=$SCRIPT_DIR/nuget.exe
+TOOLS_DIR=$SCRIPT_DIR/tools
+NUGET_EXE=$TOOLS_DIR/nuget.exe
 NUGET_URL=https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
 CAKE_VERSION=0.32.1
 CAKE_EXE=$TOOLS_DIR/Cake.$CAKE_VERSION/Cake.exe
