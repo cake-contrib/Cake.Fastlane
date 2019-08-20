@@ -31,7 +31,7 @@ skip_branch_with_pr: true
 branches:
   # Whitelist
   only:
-    - develop
+    - dev
     - master
     - /release/.*/
     - /hotfix/.*/
