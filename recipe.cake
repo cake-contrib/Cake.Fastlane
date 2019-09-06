@@ -14,7 +14,8 @@ BuildParameters.SetParameters(context: Context,
                             shouldRunCodecov: false,
                             shouldRunDupFinder: false,
 							shouldRunInspectCode: false,
-                            shouldRunDotNetCorePack: true);
+                            shouldRunDotNetCorePack: true,
+                            shouldRunGitVersion: true);
 
 Task("AzureDevOps")
     .IsDependentOn("Publish-MyGet-Packages")

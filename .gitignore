@@ -296,3 +296,5 @@ BuildArtifacts/
 *.xsd.cs
 
 .droidres
+
+.DS_Store
