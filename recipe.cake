@@ -2,19 +2,20 @@
 
 Environment.SetVariableNames();
 
-BuildParameters.SetParameters(context: Context, 
+BuildParameters.SetParameters(context: Context,
                             title: "Cake.Fastlane",
                             buildSystem: BuildSystem,
                             sourceDirectoryPath: "./src",
-                            repositoryOwner: "RLittlesII",  
-                            repositoryName: "Cake.Fastlane",  
-                            appVeyorAccountName: "RLittlesII",
+                            repositoryOwner: "cake-contrib",
+                            repositoryName: "Cake.Fastlane",
+                            appVeyorAccountName: "cakecontrib",
                             integrationTestScriptPath: "./tests/integration/test.cake",
                             shouldRunIntegrationTests: true,
                             shouldRunCodecov: false,
                             shouldRunDupFinder: false,
 							shouldRunInspectCode: false,
-                            shouldRunDotNetCorePack: true);
+                            shouldRunDotNetCorePack: true,
+                            shouldRunGitVersion: true);
 
 Task("AzureDevOps")
     .IsDependentOn("Publish-MyGet-Packages")
@@ -27,9 +28,9 @@ BuildParameters.Tasks.IntegrationTestTask.WithCriteria(() => BuildParameters.IsR
 BuildParameters.PrintParameters(Context);
 
 ToolSettings.SetToolSettings(context: Context,
-                            dupFinderExcludePattern: new string[] { BuildParameters.RootDirectoryPath + "/src/Cake.Fastlane.Tests/**/*.cs", BuildParameters.RootDirectoryPath + "/src/**/Cake.Fastlane.AssemblyInfo.cs"  }, 
-                            testCoverageFilter: "+[*]* -[xunit.*]* -[Cake.Core]* -[Cake.Testing]* -[*.Tests]* ", 
-                            testCoverageExcludeByAttribute: "*.ExcludeFromCodeCoverage*", 
+                            dupFinderExcludePattern: new string[] { BuildParameters.RootDirectoryPath + "/src/Cake.Fastlane.Tests/**/*.cs", BuildParameters.RootDirectoryPath + "/src/**/Cake.Fastlane.AssemblyInfo.cs"  },
+                            testCoverageFilter: "+[*]* -[xunit.*]* -[Cake.Core]* -[Cake.Testing]* -[*.Tests]* ",
+                            testCoverageExcludeByAttribute: "*.ExcludeFromCodeCoverage*",
                             testCoverageExcludeByFile: "*/*Designer.cs;*/*.g.cs;*/*.g.i.cs");
 
 Build.RunDotNetCore();
